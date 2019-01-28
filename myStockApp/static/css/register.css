@@ -7,7 +7,7 @@ body{
     position: absolute;
     left:50%;
     top:0px;
-    background: url(../stock_app_html/image/webbanner.jpg);
+    background: url("../image/webbanner.jpg");
     margin-left:-600px;
     width: 1200px;
     height:130px;
@@ -16,7 +16,7 @@ body{
 .ico{
     float:right;
     margin-right: 300px;
-    background: url(../stock_app_html/image/stockIco.png);
+    background: url("../image/stockIco.png");
     background-size: 100% 100%;
     width: 232px;
     height: 130px;
@@ -94,7 +94,7 @@ body{
     position: absolute;
     height:100%;
     width: 100%;
-    background-image: url(../stock_app_html/image/registerPaper.jpg);
+    background-image: url("../image/registerPaper.jpg");
     background-size: 100% 100%;
 }
 .registerWall{
@@ -104,7 +104,7 @@ body{
     left:35%;
     width: 400px;
     height: 500px;
-    background-image: url(../stock_app_html/image/registerWall.jpg);
+    background-image: url("../image/registerWall.jpg");
     opacity: 0.2;
     background-size:100% 100%;
 }
