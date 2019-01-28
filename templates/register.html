@@ -1,10 +1,77 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+<html>
+    <head>
+        <link href="register.css" rel="stylesheet" type="text/css"/>
+    </head>
+    <body>
+        <div class="banner" id="banner">
+                <div class="ico">
+                    </div>
+                    <div class="webname">
+                           <B> MY STOCK WEB</B>
+                             </div>
+        </div>
+        <div class="mainMenu " id="mainMenu ">
+             <ul>
+                <li><a href=""></a></li>
+                <li><a href="">主页</a></li>
+                <li><a href=""></a></li>
+                <li><a href="">与我联系</a></li>
+                <li><a href=""></a></li>
+                <li><a href="">帮助</a></li>
+                </ul>
+        </div>
 
-</body>
+        <div class="center" id="center">
+            <div class="webpaper"></div>
+            <div class="registerWall"></div>
+            <div class="register-form" id="register_form">
+                    <div class="title">
+                            <span>注册</span>
+                        </div>
+
+                        <div class="title-msg">
+                            <span></span><!--此处为提示信息显示处-->
+                        </div>
+
+                        <form class="register" method="post" novalidate >
+
+                            <div class="input-content">
+                                <div style="text-align: center">
+                                    <input type="text" autocomplete="off"
+                                           placeholder="用户名" name="userName" required />
+                                </div >
+
+                                <div style="margin-top: 32px;text-align: center">
+                                    <input type="password"
+                                           autocomplete="off" placeholder="登录密码" name="password" required maxlength="32"/>
+                                </div>
+                                <div style="margin-top: 32px;text-align: center">
+                                    <input type="password"
+                                           autocomplete="off" placeholder="重复登录密码" name="rePassword" required maxlength="32"/>
+                                </div>
+
+                                <div class="identiy">
+                                    <div class="identiyCode"><image></image></div>
+                                    <div class="reIdentiyCode">
+                                    <input type="text" style="width: 120px; font-size: 16px;"
+                                           autocomplete="off" placeholder="请输入验证码" name="password" />
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div style="text-align: center; margin-top: 160px;">
+                                <button type="submit" class="enter-btn" >注册</button>
+                            </div>
+
+                            <div class="tips">
+                                <div class="right_tip"><span>登录</span></div>
+                            </div>
+                        </form>
+            </div>
+
+        </div>
+        <div class="footer" id="copyright">
+                <span>Copyright2019杨洋.AllRightsReserved</span>
+        </div>
+    </body>
 </html>
