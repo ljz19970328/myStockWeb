@@ -1,4 +1,4 @@
-#!D:\JetBrains\project\myStockWeb\venv\Scripts\python.exe
+#!D:\JetBrains\project\untitled\venv\Scripts\python.exe
 from django.core import management
 
 if __name__ == "__main__":
