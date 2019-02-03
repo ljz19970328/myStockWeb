@@ -36,9 +36,9 @@ body{
     left:50%; 
     margin-left:-600px;
     width: 1200px;
-    height:50px;
+    height:52px;
     background-color: #465c71;
-    border: solid 1px;
+
 }
 
 .mainMenu ul
@@ -84,11 +84,11 @@ body{
 
 .center{
     position: absolute;
-    top: 180px;
+    top: 182px;
     left:50%; 
     margin-left:-600px;
     width: 1200px;
-    height: 830px; 
+    height: 750px;
     border: solid 1px;
 }
 .webpaper{

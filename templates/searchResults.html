@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <div>
+    {% for item in searchResults%}
+        <p>{{ item.ts_code}}，{{ item.symbol}}，{{ item.name}}，{{ item.area}}，{{ item.industry}}，{{ item.market}}</p>
+    {% endfor %}
+    </div>
+</body>
+</html>

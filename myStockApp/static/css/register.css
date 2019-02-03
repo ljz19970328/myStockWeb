@@ -94,7 +94,7 @@ body{
     position: absolute;
     height:100%;
     width: 100%;
-    background-image: url("../image/registerPaper.jpg");
+    background-image: url("../image/registerPaper2.jpg");
     background-size: 100% 100%;
 }
 .registerWall{
@@ -105,7 +105,7 @@ body{
     width: 400px;
     height: 500px;
     background-image: url("../image/registerWall.jpg");
-    opacity: 0.2;
+    opacity: 0.25;
     background-size:100% 100%;
 }
 .register-form{
@@ -115,7 +115,7 @@ body{
     left:35%;
     width: 400px;
     height: 500px;
-    box-shadow: 2px 2px 2px  #1db5c9;
+    box-shadow: 2px 2px 2px #79aec8;
     background-size:100% 100%;
 
 
@@ -129,7 +129,7 @@ body{
 
 .title span {
     font-size: 32px;
-    text-shadow: 5px 5px 5px #19865C;
+    text-shadow: 5px 5px 5px  #79aec8;
     text-align: center;
     display:block;
     color:#fffccf;

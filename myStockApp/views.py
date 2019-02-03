@@ -68,7 +68,7 @@ def register(request):
 def verify_code(request):
     # 1，定义变量，用于画面的背景色、宽、高
     # random.randrange(20, 100)意思是在20到100之间随机找一个数
-    bgcolor = (random.randrange(20, 100), random.randrange(20, 100), 255)
+    bgcolor = (random.randrange(100, 150), random.randrange(60, 120), 226)
     width = 80
     height = 40
     # 2，创建画面对象python manage.py makemigrations
