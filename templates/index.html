@@ -8,39 +8,32 @@
     </head>
     <body>
         <div class="banner" id="banner">
-                <div class="ico">
-                    </div>
-                    <div class="webname">
-                           <B> MY STOCK WEB</B>
-                             </div>
+            <div class="web-name"><span>my stock web</span></div>
+            <div class="span2"><a href="/login/">注册</a> | <a href="/register/" >登录</a></div>
         </div>
         <div class="mainMenu " id="mainMenu ">
-             <ul>
-                <li><a href=""></a></li>
-                <li><a href="">首页</a></li>
-                <li><a href=""></a></li>
-                <li><a href="">我的收藏</a></li>、
-                <li><a href=""></a></li>
-                <li><a href="">个人中心</a></li>
-                <li><a href=""></a></li>
-                <li><a href="">与我联系</a></li>
-                <li><a href=""></a></li>
-                <li><a href="">帮助</a></li>
-                </ul>
-            <div class="search-box">
-                <form method="post" >
-                    {% csrf_token %}
-                    <input name="stock_info" id="search-input" class="search-input"></input>
-                    <button type="button" class="search-btn" id="search-btn"  >搜索</button>
-                </form>
-            </div>
+             <div class="span1"><a href="/main/" target="contentIframe" >首页</a></div>
+
+              <div class="span1"><a href="" target="contentIframe">最近新闻</a></div>
+
+               <div class="span1"><a href="" target="contentIframe">我的收藏</a></div>
+
+               <div class="span1"> <a href="/callMaster/" target="contentIframe">与我联系</a></div>
+
+              <div class="span1"><a href="/help/" target="contentIframe">帮助</a></div>
+
+
+            {% csrf_token %}
+            <input name="stock_info" id="search-input" class="search-input"></input>
+            <button type="button" class="search-btn" id="search-btn"  >搜索</button>
+
+
+
+
         </div>
 
-        <div class="center" id="center">
-            <div id="broadside-box"><iframe class="broadside"></iframe></div>
-           <div id="content-box"> <iframe class="content"  id="content" target="contentIframe"  src="/main/"  ></iframe>
-                </div>
-
+        <div class="content" id="content">
+           <iframe class="content-iframe"  id="content-iframe" name="contentIframe"  src="/main/"  ></iframe>
         </div>
         <div class="footer" id="copyright">
                 <span>Copyright2019杨洋.AllRightsReserved</span>
@@ -58,7 +51,7 @@
                 success:function(response) {
                     console.log(response);
                     if(response.msg='ok'){
-                        $("#content-box").html("<iframe class=\"content\"  id=\"content\" target=\"contentIframe\"  src=\"/show_searchResult/\" >")
+                        $("#content").html("<iframe class=\"content-iframe\"  id=\"content-iframe\" target=\"contentIframe\"  src=\"/show_searchResult/\" >")
                         $("#msg").html(response.msg)
                     }
                     else{

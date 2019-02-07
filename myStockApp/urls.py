@@ -2,6 +2,7 @@ from django.conf.urls import url
 from myStockApp import views
 from myStockApp import dealStockdata
 
+
 app_name = 'myStockApp'   # url反向解析
 
 urlpatterns = [
@@ -12,7 +13,10 @@ urlpatterns = [
     url(r'^verify_code/$', views.verify_code),
 
 
+    url(r'^main/', dealStockdata.main),
+
     url(r'^search/', dealStockdata.search),
     url(r'^show_searchResult/', dealStockdata.show_searchResult),
-    url(r'^main/', dealStockdata.main),
+    url(r'^query_stockDetails/', dealStockdata.query_stockDetails),
+    url(r'^show_stockDetails/', dealStockdata.show_stockDetails)
 ]
