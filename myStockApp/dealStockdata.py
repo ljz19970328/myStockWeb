@@ -1,4 +1,4 @@
-
+import numpy as np
 from django.http import JsonResponse
 from django.shortcuts import render, redirect, render_to_response
 import json
@@ -32,6 +32,7 @@ def show_searchResult(request):
 
 def query_stockDetails(request):
     ts_code = request.POST.get('ts_code')
+    request.session['global_ts_code'] = ts_code
     global stock_details
     stock_details = StockDetails.objects.filter(ts_code=ts_code)
     response = {"msg": ""}
@@ -42,9 +43,21 @@ def show_stockDetails(request):
     return render(request, 'stockDetails.html', {'stockDetails': stock_details})
 
 
-def deal_Daily(stock_NO):
-    df = pro.daily(ts_code=stock_NO, start_date='20180101', end_date='20190201')
-    print(df.close)
+def deal_Daily(request):
+    ts_code = request.session.get('global_ts_code')
+    response = {"msg": ""}
+    try:
+        df = pro.daily(ts_code=ts_code, start_date='20180101', end_date='20181101')
+        trade_date = df["trade_date"]
+        k_line_data = df[["open", "close", "low", "high"]]
+        trade_date = trade_date.tolist()
+        var1 = np.array(k_line_data)
+        k_line_data = var1.tolist()
+        return render(request, 'stockDataView.html', {'categoryData': trade_date, 'values': k_line_data})
+    except:
+        print("请求繁忙，请稍后再试")
+        response["msg"] = "请求繁忙，请稍后再试"
+    return JsonResponse(response)
 
 
 def deal_Weekly(stock_NO):
