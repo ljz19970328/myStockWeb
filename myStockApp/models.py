@@ -31,7 +31,7 @@ class Stock(models.Model):
     area = models.CharField(max_length=32 )  # 股票地域
     industry = models.CharField(max_length=32)  # 股票行业
     market = models.CharField(max_length=32)  # 股票市场类型
-    list_date=models.DateTimeField() #股票上市时间
+    list_date = models.CharField(max_length=32) #股票上市时间
 
     def __str__(self):
         return self.name

@@ -4,13 +4,13 @@ body{
     width:100%;
 }
 .banner{
+    background-size: 100% 100%;
     position: absolute;
     left:50%;
     top:0px;
     margin-left:-600px;
     width: 1200px;
     height:30px;
-    border: solid 1px #bbccdd;
 }
 .web-name{
     float: left;
@@ -41,7 +41,6 @@ body{
     width: 1200px;
     height:52px;
     background-color: #465c71;
-    border: solid 1px #bbccdd;
 
 }
 .span1{
@@ -90,8 +89,6 @@ body{
     width: 1200px;
     height: 960px;
     border-top: 0px;
-    border-left: solid 1px #bbccdd;
-    border-right:solid 1px #bbccdd;  ;
 }
 
 .content-iframe{
@@ -99,6 +96,7 @@ body{
     height:960px;
     width: 1200px;
     border-width: 0px;
+    scrolling:auto;
 }
 .footer{
     position: absolute;
@@ -107,7 +105,6 @@ body{
     margin-left:-600px;
     width: 1200px;
     height:60px;
-    border: solid 1px #bbccdd;
     background-color:#465c71;
 }
 .footer span{

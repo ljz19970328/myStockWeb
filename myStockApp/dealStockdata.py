@@ -26,7 +26,6 @@ def search(request):
 
 
 def show_searchResult(request):
-
     return render(request, 'searchResults.html',{'searchResults': stock_data})
 
 
@@ -40,32 +39,31 @@ def query_stockDetails(request):
 
 
 def show_stockDetails(request):
-    return render(request, 'stockDetails.html', {'stockDetails': stock_details})
+    stockDetails=stock_details
+    categoryData,values=deal_Daily(request.session.get('global_ts_code'))
+    return render(request, 'stockDetails.html', locals())
 
 
-def deal_Daily(request):
-    ts_code = request.session.get('global_ts_code')
-    response = {"msg": ""}
-    try:
-        df = pro.daily(ts_code=ts_code, start_date='20180101', end_date='20181101')
-        trade_date = df["trade_date"]
-        k_line_data = df[["open", "close", "low", "high"]]
-        trade_date = trade_date.tolist()
-        var1 = np.array(k_line_data)
-        k_line_data = var1.tolist()
-        return render(request, 'stockDataView.html', {'categoryData': trade_date, 'values': k_line_data})
-    except:
-        print("请求繁忙，请稍后再试")
-        response["msg"] = "请求繁忙，请稍后再试"
-    return JsonResponse(response)
+def deal_Daily(ts_code):
+    # 获得日线数据，提取日k线所需数据
+    df = pro.daily(ts_code=ts_code, start_date='20180101')
+    trade_date = df["trade_date"]
+    k_line_data = df[["open", "close", "low", "high"]]
+    categoryData = trade_date.tolist()
+    var1 = np.array(k_line_data)
+    values = var1.tolist()
+    return (categoryData,values)
 
 
-def deal_Weekly(stock_NO):
-    df = pro.weekly(ts_code=stock_NO, start_date='20180101', end_date='20181101')
+def deal_Weekly(ts_code):
+    # 获得周线数据，提取周k线所需数据
+    df = pro.weekly(ts_code=ts_code, start_date='20180101')
 
 
-def deal_Monthly(stock_NO):
-    df = pro.monthly(ts_code=stock_NO, start_date='20180101', end_date='20181101')
+def deal_Monthly(ts_code):
+    # 获得月线数据，提取月k线所需数据
+    df = pro.monthly(ts_code=ts_code, start_date='20180101')
+
 
 def main(request):
     return render(request,"main.html")

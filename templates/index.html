@@ -51,7 +51,7 @@
                 success:function(response) {
                     console.log(response);
                     if(response.msg='ok'){
-                        $("#content").html("<iframe class=\"content-iframe\"  id=\"content-iframe\" target=\"contentIframe\"  src=\"/show_searchResult/\" >")
+                        $("#content").html("<iframe class=\"content-iframe\"  id=\"content-iframe\" name=\"contentIframe\"  src=\"/show_searchResult/\" >")
                         $("#msg").html(response.msg)
                     }
                     else{
