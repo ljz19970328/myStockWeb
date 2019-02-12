@@ -15,7 +15,7 @@
 <div class="profile-title">公司简介：</div>
 {% for item  in stockDetails%}
     <p>股票代码:{{ item.ts_code}}</p>
-    <p>所属地域：{{ item.province}}省，{{ item.city}}市</p>
+    <p>所属地域：{{ item.province}}省，{{ item.city}}</p>
     <p>法人代表：{{ item.chairman}}</p>
     <p>总经理：{{ item.manager}}</p>
     <p>上市日期：{{ item.setup_date}}</p>
@@ -32,25 +32,38 @@
     <!--<div><a href="/show_earning_pre/">查看股票业绩预告</a></div>
     <div><a href="/show_stock_deal/">查看股票交易情况</a></div>!-->
 </div>
-<div class="K-line-box" id="day"  >
+<div class="K-line-box" id="K-line-box"  >
 </div>
 </div>
 </body>
 <script type="text/javascript">
     var data0 =  {
-        categoryData: {{ categoryData |safe}}, //数组中的日期 x轴对应的日期
-        values: {{ values|safe }}             //数组中的数据 y轴对应的数据
+        categoryData: {{ categoryData0 |safe}}, //数组中的日期 x轴对应的日期
+        values: {{ values0|safe }}             //数组中的数据 y轴对应的数据
+    };
+
+    var data1 =  {
+        categoryData: {{ categoryData1 |safe}}, //数组中的日期 x轴对应的日期
+        values: {{ values1|safe }}             //数组中的数据 y轴对应的数据
+    };
+
+    var data2 =  {
+        categoryData: {{ categoryData2 |safe}}, //数组中的日期 x轴对应的日期
+        values: {{ values2|safe }}             //数组中的数据 y轴对应的数据
     };
     $(function(){
-        show_daily_line()
+        show_k_line(data0,'日k线')
         $("#day-line-bt").click(function(){
-            show_daily_line()
+            $('#K-line-box').html()
+            show_k_line(data0,'日k线')
     });
         $("#week-line-bt").click(function(){
-            show_weekly_line()
+            $('#K-line-box').html()
+            show_k_line(data1,'周k线')
     });
         $("#month-line-bt").click(function(){
-            show_month_line()
+            $('#K-line-box').html()
+            show_k_line(data2,'月k线')
     });
     })
     </script>

@@ -1,21 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="3459e597-6db4-462c-8727-9727f39af96c" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/myStockApp/static/css/stockDetails.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/myStockApp/static/js/delEchart.js" afterDir="false" />
+    <list default="true" id="3459e597-6db4-462c-8727-9727f39af96c" name="Default Changelist" comment="1.5修改">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/db.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/db.sqlite3" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/myStockApp/dealStockdata.py" beforeDir="false" afterPath="$PROJECT_DIR$/myStockApp/dealStockdata.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/myStockApp/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/myStockApp/models.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/myStockApp/static/css/index.css" beforeDir="false" afterPath="$PROJECT_DIR$/myStockApp/static/css/index.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/myStockApp/static/css/showStockDetails.css" beforeDir="false" afterPath="$PROJECT_DIR$/myStockApp/static/css/searchResults.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/myStockApp/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/myStockApp/urls.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/login.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/login.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/register.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/register.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/searchResults.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/searchResults.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/stockDataView.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/myStockApp/static/css/stockDetails.css" beforeDir="false" afterPath="$PROJECT_DIR$/myStockApp/static/css/stockDetails.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/myStockApp/static/js/delEchart.js" beforeDir="false" afterPath="$PROJECT_DIR$/myStockApp/static/js/delEchart.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/stockDetails.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/stockDetails.html" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -29,41 +21,23 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/templates/searchResults.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2036">
-              <caret line="180" column="32" selection-start-line="180" selection-start-column="32" selection-end-line="180" selection-end-column="32" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/templates/stockDetails.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="761">
-              <caret line="56" column="7" selection-start-line="56" selection-start-column="7" selection-end-line="56" selection-end-column="7" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/myStockApp/static/css/stockDetails.css">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="182">
-              <caret line="28" column="15" lean-forward="true" selection-start-line="28" selection-start-column="15" selection-end-line="28" selection-end-column="15" />
+            <state relative-caret-position="286">
+              <caret line="29" column="50" lean-forward="true" selection-start-line="29" selection-start-column="50" selection-end-line="29" selection-end-column="50" />
+              <folding>
+                <element signature="n#script#0;n#html#0;n#!!top" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/myStockApp/urls.py">
+        <entry file="file://$PROJECT_DIR$/myStockApp/static/js/delEchart.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="312">
-              <caret line="12" column="46" selection-start-line="12" selection-start-column="46" selection-end-line="12" selection-end-column="46" />
-              <folding>
-                <element signature="e#0#32#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="26">
+              <caret line="1" column="33" selection-start-line="1" selection-start-column="33" selection-end-line="1" selection-end-column="33" />
             </state>
           </provider>
         </entry>
@@ -71,18 +45,16 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/myStockApp/dealStockdata.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="266">
-              <caret line="48" column="58" selection-start-line="48" selection-start-column="58" selection-end-line="48" selection-end-column="58" />
+            <state relative-caret-position="936">
+              <caret line="36" column="26" lean-forward="true" selection-start-line="36" selection-start-column="26" selection-end-line="36" selection-end-column="26" />
               <folding>
                 <element signature="e#0#18#0" expanded="true" />
+                <element signature="e#1468#1846#0" />
+                <element signature="e#1879#2263#0" />
+                <element signature="e#2297#2682#0" />
               </folding>
             </state>
           </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/myStockWeb/urls.py">
-          <provider selected="true" editor-type-id="text-editor" />
         </entry>
       </file>
     </leaf>
@@ -105,6 +77,9 @@
       <find>print</find>
       <find>query_stockDetails</find>
       <find>query</find>
+      <find>categoryData</find>
+      <find>data</find>
+      <find>values</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -136,15 +111,15 @@
         <option value="$PROJECT_DIR$/templates/login.html" />
         <option value="$PROJECT_DIR$/templates/register.html" />
         <option value="$PROJECT_DIR$/myStockApp/models.py" />
-        <option value="$PROJECT_DIR$/myStockApp/static/css/index.css" />
         <option value="$PROJECT_DIR$/templates/stockDataView.html" />
         <option value="$PROJECT_DIR$/templates/searchResults.html" />
         <option value="$PROJECT_DIR$/myStockApp/urls.py" />
-        <option value="$PROJECT_DIR$/myStockApp/static/js/delEchart.js" />
-        <option value="$PROJECT_DIR$/myStockApp/dealStockdata.py" />
         <option value="$PROJECT_DIR$/myStockApp/static/css/searchResults.css" />
-        <option value="$PROJECT_DIR$/templates/stockDetails.html" />
         <option value="$PROJECT_DIR$/myStockApp/static/css/stockDetails.css" />
+        <option value="$PROJECT_DIR$/myStockApp/static/css/index.css" />
+        <option value="$PROJECT_DIR$/myStockApp/static/js/delEchart.js" />
+        <option value="$PROJECT_DIR$/templates/stockDetails.html" />
+        <option value="$PROJECT_DIR$/myStockApp/dealStockdata.py" />
       </list>
     </option>
   </component>
@@ -165,29 +140,6 @@
             <path>
               <item name="myStockWeb" type="b2602c69:ProjectViewProjectNode" />
               <item name="myStockWeb" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="myStockWeb" type="b2602c69:ProjectViewProjectNode" />
-              <item name="myStockWeb" type="462c0819:PsiDirectoryNode" />
-              <item name="myStockApp" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="myStockWeb" type="b2602c69:ProjectViewProjectNode" />
-              <item name="myStockWeb" type="462c0819:PsiDirectoryNode" />
-              <item name="myStockApp" type="462c0819:PsiDirectoryNode" />
-              <item name="static" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="myStockWeb" type="b2602c69:ProjectViewProjectNode" />
-              <item name="myStockWeb" type="462c0819:PsiDirectoryNode" />
-              <item name="myStockApp" type="462c0819:PsiDirectoryNode" />
-              <item name="static" type="462c0819:PsiDirectoryNode" />
-              <item name="css" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="myStockWeb" type="b2602c69:ProjectViewProjectNode" />
-              <item name="myStockWeb" type="462c0819:PsiDirectoryNode" />
-              <item name="templates" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -273,7 +225,7 @@
       <workItem from="1548919160821" duration="5162000" />
       <workItem from="1548924393278" duration="37452000" />
       <workItem from="1549199213440" duration="613000" />
-      <workItem from="1549282665434" duration="73651000" />
+      <workItem from="1549282665434" duration="82882000" />
     </task>
     <task id="LOCAL-00001" summary="数据库查询操作">
       <created>1549198925872</created>
@@ -296,11 +248,18 @@
       <option name="project" value="LOCAL" />
       <updated>1549613212517</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="1.5修改">
+      <created>1549874397759</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1549874397759</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="137708000" />
+    <option name="totallyTimeSpent" value="146939000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1456" height="876" extended-state="6" />
@@ -312,15 +271,15 @@
       <window_info anchor="bottom" id="Messages" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.49856734" visible="true" weight="0.32345015" />
+      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.49856734" visible="true" weight="0.1819407" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" />
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Version Control" order="8" weight="0.34366578" />
+      <window_info anchor="bottom" id="Version Control" order="8" weight="0.28167117" />
       <window_info anchor="bottom" id="Database Changes" order="9" />
-      <window_info anchor="bottom" id="Event Log" order="10" sideWeight="0.50143266" side_tool="true" weight="0.04043127" />
+      <window_info anchor="bottom" id="Event Log" order="10" sideWeight="0.50143266" side_tool="true" weight="0.32345015" />
       <window_info anchor="bottom" id="Terminal" order="11" sideWeight="0.49928367" weight="0.29784366" />
       <window_info anchor="bottom" id="Python Console" order="12" weight="0.28167117" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
@@ -338,7 +297,8 @@
     <MESSAGE value="数据库查询操作" />
     <MESSAGE value="修改" />
     <MESSAGE value="日K线" />
-    <option name="LAST_COMMIT_MESSAGE" value="日K线" />
+    <MESSAGE value="1.5修改" />
+    <option name="LAST_COMMIT_MESSAGE" value="1.5修改" />
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/myStockApp/static/js/jquery-3.3.1.min.js">
@@ -508,13 +468,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/myStockApp/static/css/login.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret selection-end-line="4" selection-end-column="1" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/myStockApp/models.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="858">
@@ -533,13 +486,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="78">
           <caret line="3" column="8" selection-start-line="3" selection-start-column="8" selection-end-line="3" selection-end-column="82" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/myStockApp/static/css/index.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="494">
-          <caret line="19" column="16" selection-start-line="19" selection-start-column="16" selection-end-line="19" selection-end-column="16" />
         </state>
       </provider>
     </entry>
@@ -562,15 +508,19 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/templates/searchResults.html">
+    <entry file="file://$PROJECT_DIR$/myStockApp/static/css/searchResults.css">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2036">
-          <caret line="180" column="32" selection-start-line="180" selection-start-column="32" selection-end-line="180" selection-end-column="32" />
+        <state relative-caret-position="260">
+          <caret line="37" column="5" selection-start-line="37" selection-start-column="5" selection-end-line="37" selection-end-column="21" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/myStockWeb/urls.py">
-      <provider selected="true" editor-type-id="text-editor" />
+    <entry file="file://$PROJECT_DIR$/myStockApp/static/css/stockDetails.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="208">
+          <caret line="8" lean-forward="true" selection-start-line="8" selection-end-line="8" />
+        </state>
+      </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/myStockApp/urls.py">
       <provider selected="true" editor-type-id="text-editor">
@@ -582,44 +532,57 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/myStockWeb/urls.py">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/myStockApp/static/css/login.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="546">
+          <caret line="39" column="29" selection-start-line="39" selection-start-column="23" selection-end-line="39" selection-end-column="29" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/myStockApp/static/css/index.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="390">
+          <caret line="15" column="1" selection-start-line="15" selection-start-column="1" selection-end-line="15" selection-end-column="1" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/searchResults.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2426">
+          <caret line="114" selection-start-line="114" selection-end-line="114" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/myStockApp/dealStockdata.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="266">
-          <caret line="48" column="58" selection-start-line="48" selection-start-column="58" selection-end-line="48" selection-end-column="58" />
+        <state relative-caret-position="936">
+          <caret line="36" column="26" lean-forward="true" selection-start-line="36" selection-start-column="26" selection-end-line="36" selection-end-column="26" />
           <folding>
             <element signature="e#0#18#0" expanded="true" />
+            <element signature="e#1468#1846#0" />
+            <element signature="e#1879#2263#0" />
+            <element signature="e#2297#2682#0" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/myStockApp/static/js/delEchart.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret column="23" selection-start-column="23" selection-end-column="23" />
-          <folding>
-            <element signature="n#!!block;n#show_daily_line#0" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/myStockApp/static/css/searchResults.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="260">
-          <caret line="37" column="5" selection-start-line="37" selection-start-column="5" selection-end-line="37" selection-end-column="21" />
+        <state relative-caret-position="26">
+          <caret line="1" column="33" selection-start-line="1" selection-start-column="33" selection-end-line="1" selection-end-column="33" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/templates/stockDetails.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="761">
-          <caret line="56" column="7" selection-start-line="56" selection-start-column="7" selection-end-line="56" selection-end-column="7" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/myStockApp/static/css/stockDetails.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="182">
-          <caret line="28" column="15" lean-forward="true" selection-start-line="28" selection-start-column="15" selection-end-line="28" selection-end-column="15" />
+        <state relative-caret-position="286">
+          <caret line="29" column="50" lean-forward="true" selection-start-line="29" selection-start-column="50" selection-end-line="29" selection-end-column="50" />
+          <folding>
+            <element signature="n#script#0;n#html#0;n#!!top" />
+          </folding>
         </state>
       </provider>
     </entry>

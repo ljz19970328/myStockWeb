@@ -1,28 +1,30 @@
-function show_daily_line() {
-    var myChart = echarts.init(document.getElementById('day'));
+
+function show_k_line(data,type) {
+    var myChart = echarts.init(document.getElementById('K-line-box'));
     //计算MA平均线，N日移动平均线=N日收盘价之和/N  dayCount要计算的天数(5,10,20,30)
-    function calculateMA(dayCount) {
+    function calculateMA(Count) {
         var result = [];
-        for (var i = 0, len = data0.values.length; i < len; i++) {
-            if (i < dayCount) {
+        for (var i = 0, len = data.values.length; i < len; i++) {
+            if (i < Count) {
                 result.push('-');
                 //alert(result);
                 continue;   //结束单次循环，即不输出本次结果
             }
             var sum = 0;
-            for (var j = 0; j < dayCount; j++) {
+            for (var j = 0; j < Count; j++) {
                 //收盘价总和
-                sum += data0.values[i - j][1];
+                sum += data.values[i - j][1];
                 //alert(sum);
             }
-            result.push(sum / dayCount);
+            result.push(sum / Count);
             // alert(result);
         }
         return result;
     }
+
     option = {
         title: {    //标题
-            text: '上证指数',
+            text: type,
             left: 0
         },
         tooltip: {  //提示框
@@ -31,19 +33,19 @@ function show_daily_line() {
                 type: 'cross'   //指示器类型，十字准星
             }
         },
-        legend: {   //图例控件，点击图例控制哪些系列不现实
-            data: ['日K', 'MA5', 'MA10', 'MA20', 'MA30']
+        legend: {   //图例控件
+            data: [type, 'MA5', 'MA10', 'MA20', 'MA30']
         },
         grid: {     //直角坐标系
             show: true,
             left: '10%',    //grid组件离容器左侧的距离
             right: '10%',
             bottom: '15%',
-            //backgroundColor:'#ccc'
+            backgroundColor:'#ccc'
         },
         xAxis: {
             type: 'category',   //坐标轴类型，类目轴
-            data: data0.categoryData,
+            data: data.categoryData,
             //scale: true,  //只在数字轴中有效
             boundaryGap: false,    //刻度作为分割线，标签和数据点会在两个刻度上
             axisLine: {onZero: false},
@@ -62,8 +64,8 @@ function show_daily_line() {
             {
                 filterMode: 'filter',    //当前数据窗口外的数据被过滤掉来达到数据窗口缩放的效果  默认值filter
                 type: 'inside', //内置型数据区域缩放组件
-                start: 0,      //数据窗口范围的起始百分比
-                end: 50        //数据窗口范围的结束百分比
+                start: 50,      //数据窗口范围的起始百分比
+                end: 100        //数据窗口范围的结束百分比
             },
             {
                 show: true,
@@ -75,9 +77,9 @@ function show_daily_line() {
         ],
         series: [   //图表类型
             {
-                name: '日K',
+                name: type,
                 type: 'candlestick',    //K线图
-                data: data0.values,     //y轴对应的数据
+                data: data.values,     //y轴对应的数据
                 ////////////////////////图标标注/////////////////////////////
                 markPoint: {    //图表标注
                     label: {    //标注的文本

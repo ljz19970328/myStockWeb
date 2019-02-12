@@ -40,7 +40,10 @@ def query_stockDetails(request):
 
 def show_stockDetails(request):
     stockDetails=stock_details
-    categoryData,values=deal_Daily(request.session.get('global_ts_code'))
+    ts_code=request.session.get('global_ts_code')
+    categoryData0, values0 = deal_Daily(ts_code)
+    categoryData1, values1 = deal_Weekly(ts_code)
+    categoryData2, values2 = deal_Monthly(ts_code)
     return render(request, 'stockDetails.html', locals())
 
 
@@ -50,19 +53,37 @@ def deal_Daily(ts_code):
     trade_date = df["trade_date"]
     k_line_data = df[["open", "close", "low", "high"]]
     categoryData = trade_date.tolist()
+    categoryData=list(reversed(categoryData))
     var1 = np.array(k_line_data)
     values = var1.tolist()
+    values=list(reversed(values))
     return (categoryData,values)
 
 
 def deal_Weekly(ts_code):
     # 获得周线数据，提取周k线所需数据
-    df = pro.weekly(ts_code=ts_code, start_date='20180101')
+    df = pro.weekly(ts_code=ts_code, start_date='20160101')
+    trade_date = df["trade_date"]
+    k_line_data = df[["open", "close", "low", "high"]]
+    categoryData = trade_date.tolist()
+    categoryData = list(reversed(categoryData))
+    var1 = np.array(k_line_data)
+    values = var1.tolist()
+    values = list(reversed(values))
+    return (categoryData, values)
 
 
 def deal_Monthly(ts_code):
     # 获得月线数据，提取月k线所需数据
-    df = pro.monthly(ts_code=ts_code, start_date='20180101')
+    df = pro.monthly(ts_code=ts_code, start_date='20140101')
+    trade_date = df["trade_date"]
+    k_line_data = df[["open", "close", "low", "high"]]
+    categoryData = trade_date.tolist()
+    categoryData = list(reversed(categoryData))
+    var1 = np.array(k_line_data)
+    values = var1.tolist()
+    values = list(reversed(values))
+    return (categoryData, values)
 
 
 def main(request):

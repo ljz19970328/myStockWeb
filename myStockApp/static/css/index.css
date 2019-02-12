@@ -4,7 +4,6 @@ body{
     width:100%;
 }
 .banner{
-    background-size: 100% 100%;
     position: absolute;
     left:50%;
     top:0px;
@@ -38,17 +37,18 @@ body{
     top:30px;
     left:50%;
     margin-left:-600px;
-    width: 1200px;
-    height:52px;
-    background-color: #465c71;
+    width: 1190px;
+    height:42px;
+    border: 5px solid #000000;
+    background-color: #8B7B8B;
 
 }
 .span1{
-    height:52px;
+    height:42px;
     width: auto;
     float: left;
     margin-left:50px;
-    line-height: 52px;
+    line-height: 42px;
 }
 .span1 a{
     font-size: 18px;
@@ -64,7 +64,7 @@ body{
 
 
 .search-input{
-    margin-top:12px ;
+    margin-top:7px ;
     height:30px;
     width: 150px;
     position: absolute;
@@ -73,7 +73,7 @@ body{
     left:900px;
 }
 .search-btn{
-    margin-top:12px ;
+    margin-top:7px ;
     height:30px;
     width: 60px;
     position: absolute;
@@ -103,9 +103,10 @@ body{
     top:1040px;
     left:50%;
     margin-left:-600px;
-    width: 1200px;
+    width: 1190px;
     height:60px;
-    background-color:#465c71;
+    border: 5px solid #000000;
+    background-color:#8B7B8B;
 }
 .footer span{
     line-height: 60px;
