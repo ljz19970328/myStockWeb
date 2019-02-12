@@ -1,18 +1,36 @@
 /*尺寸统一为1200*auto*/
-body{
-    height:100%;
-    width:100%;
+body {
+    height: 100%;
+    width: 100%;
+    background: #ebeff0;
+    margin: 0px;
 }
-.banner{
-    position: absolute;
-    left:50%;
-    top:0px;
-    margin-left:-600px;
-    width: 1200px;
-    height:30px;
+.mainMenu{
+    width: 100%;
+    height:72px;
+    background-color: #252525;
+
+}
+.fixed{
+    position: fixed;
+    top: 0;
+    z-index: 900;
 }
 .web-name{
+    align-content: center;
     float: left;
+    font-size: 22px;
+    width: 150px;
+    color: #dad9d6;
+
+}
+.web-logo{
+    float: left;
+    margin-left: 30px;
+    height: 72px;
+    width: 145px;
+    background: url("../image/logo2.png");
+    background-size: 100% 100%;
 }
 .span2{
     height:30px;
@@ -20,43 +38,38 @@ body{
     float: right;
     margin-right:50px;
     line-height: 30px;
+    color: #dad9d6;
 }
 .span2 a{
     font-size: 16px;
-    color:#000000;
+    color: #dad9d6;
     text-decoration:none;
 }
 .span2 a:hover{
-    color:#0bc5de;
+    color:#ffffff;
+    text-decoration:underline;
 }
 .web-name{
     float: left;
-}
-.mainMenu{
-    position: absolute;
-    top:30px;
-    left:50%;
-    margin-left:-600px;
-    width: 1190px;
-    height:42px;
-    border: 5px solid #000000;
-    background-color: #8B7B8B;
-
 }
 .span1{
     height:42px;
     width: auto;
     float: left;
     margin-left:50px;
+    margin-top: 20px;
     line-height: 42px;
+    color: #dad9d6;
+
 }
 .span1 a{
     font-size: 18px;
-    color:#ffffff;
+    color:#dad9d6;
     text-decoration:none;
 }
 .span1 a:hover{
-    color:#000
+    color:#ffffff;
+    text-decoration:underline;
 }
 .span1 a:active{
     color:#03F
@@ -64,7 +77,7 @@ body{
 
 
 .search-input{
-    margin-top:7px ;
+    margin-top:30px ;
     height:30px;
     width: 150px;
     position: absolute;
@@ -73,7 +86,7 @@ body{
     left:900px;
 }
 .search-btn{
-    margin-top:7px ;
+    margin-top:30px ;
     height:30px;
     width: 60px;
     position: absolute;
@@ -101,12 +114,11 @@ body{
 .footer{
     position: absolute;
     top:1040px;
-    left:50%;
-    margin-left:-600px;
-    width: 1190px;
+    width: 100%;
     height:60px;
-    border: 5px solid #000000;
-    background-color:#8B7B8B;
+    border-top: 1px solid #dad9d6;
+    background: #ffffff;
+
 }
 .footer span{
     line-height: 60px;

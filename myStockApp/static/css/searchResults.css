@@ -1,6 +1,7 @@
 .result-box{
     min-height: 780px;
     margin: 20px 50px 60px 80px;
+    background: #ffffff;
 }
 .result-table{
     margin:auto;
