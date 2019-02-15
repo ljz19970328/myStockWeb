@@ -39,18 +39,21 @@ def query_stockDetails(request):
     return JsonResponse(response)
 
 
-# 获得股票基本面数据
+# 获得股票基本面数据 交易日每日15点～17点之间更新
 def del_daily_basic(ts_code):
     trade_date = time.strftime('%Y%m%d', time.localtime(time.time()-86400))
-    print(trade_date)
     df = pro.daily_basic(ts_code=ts_code, trade_date=trade_date)
-    temp_data = np.array(df)
-    daily_basic_data = temp_data.tolist()
-    print(daily_basic_data[0])
+    data = df.to_json(orient='index')  # dataframe转json
+    temp_data = json.loads(data)  # json转dict
+    daily_basic_data = temp_data['0']  # dic 取第一条记录
+    class dicToObj:  # dict转obj
+        def __init__(self, **entries):
+            self.__dict__.update(entries)
+    r = dicToObj(**daily_basic_data)
     return daily_basic_data
 
 
-# 获得日线数据，提取日k线所需数据
+# 获得日线数据，提取日k线所需数据，交易日每天15点～16点之间更新
 def deal_Daily(ts_code):
     df = pro.daily(ts_code=ts_code, start_date='20180101')
     trade_date = df["trade_date"]

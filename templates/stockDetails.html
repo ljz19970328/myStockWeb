@@ -24,12 +24,25 @@
     <p>经营范围：{{ item.business_scope}}</p>
 {% endfor %}
 </div>
-<div class="daily_basic_data">
-<table>
+<div class="daily_basic_box">
+
+<table class="daily_basic_data">
     <tr>
-        <td>{{ daily_basic_data}}</td>
+        <td class="element">当日收盘价</td><td class="value">{{ daily_basic_data.close }}</td>
+        <td class="element">换手率（%）</td><td class="value">{{ daily_basic_data.turnover_rate }}</td>
+        <td class="element">换手率（自由流通股）</td><td class="value">{{ daily_basic_data.turnover_rate_f }}</td>
+        <td class="element">pb(市净率)</td><td class="value">{{ daily_basic_data.pb }}</td>
+        <td class="element">ps(市销率)</td><td class="value">{{ daily_basic_data.ps }}</td>
+    </tr>
+    <tr>
+        <td class="element">总股本 （万）</td><td class="value">{{ daily_basic_data.total_share }}</td>
+        <td class="element">流通股本 （万）</td><td class="value">{{ daily_basic_data.float_share }}</td>
+        <td class="element">自由流通股本 （万）</td><td class="value">{{ daily_basic_data.free_share }}</td>
+        <td class="element">总市值 （万元）</td><td class="value">{{ daily_basic_data.total_mv }}</td>
+        <td class="element">流通市值（万元）</td><td class="value">{{ daily_basic_data.circ_mv }}</td>
     </tr>
 </table>
+
 </div>
 <div>
 <div class="operation"  >

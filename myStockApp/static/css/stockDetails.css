@@ -36,15 +36,27 @@
     cursor: pointer;
     color:#0bc5de;
 }
-.daily_basic_data{
+.daily_basic_box{
     background: #ffffff;
     width: 900px;
     height: 100px;
     float: left;
     margin-left: 30px;
     margin-top:20px;
-    border: 1px solid #1db5c9;
 }
+.daily_basic_data{
+    border-collapse: collapse;
+}
+
+.element{
+    font-size: 15px;
+    border: 1px solid #0bc5de;
+}
+
+.value{
+    border: 1px solid #0bc5de;
+}
+
 .K-line-box{
     background: #ffffff;
     width: 900px;
