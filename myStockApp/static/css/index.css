@@ -33,12 +33,16 @@ body {
     background-size: 100% 100%;
 }
 .span2{
+    position: absolute;
     height:30px;
     width: auto;
-    float: right;
-    margin-right:50px;
+    right: 50px;
     line-height: 30px;
+    top: 5px;
     color: #dad9d6;
+}
+.span2 span{
+    margin-top: 2px;
 }
 .span2 a{
     font-size: 16px;
@@ -48,6 +52,15 @@ body {
 .span2 a:hover{
     color:#ffffff;
     text-decoration:underline;
+}
+.login-logo{
+    float: left;
+    height: 30px;
+    width: 30px;
+    margin-top: -3px;
+    z-index: 900;
+    background: url("../image/login.png");
+    background-size: 100% 100%;
 }
 .web-name{
     float: left;

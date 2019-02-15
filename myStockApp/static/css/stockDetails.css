@@ -1,7 +1,8 @@
 .company-profile{
     font-size: 14px;
     width: 200px;
-    min-height: 543px;
+    min-height: 650px;
+    max-height: 960px;
     height: auto;
     float: left ;
     background: #ffffff;
@@ -35,7 +36,15 @@
     cursor: pointer;
     color:#0bc5de;
 }
-
+.daily_basic_data{
+    background: #ffffff;
+    width: 900px;
+    height: 100px;
+    float: left;
+    margin-left: 30px;
+    margin-top:20px;
+    border: 1px solid #1db5c9;
+}
 .K-line-box{
     background: #ffffff;
     width: 900px;

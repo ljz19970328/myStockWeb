@@ -1,3 +1,4 @@
+import time
 import numpy as np
 from django.http import JsonResponse
 from django.shortcuts import render, redirect, render_to_response
@@ -38,52 +39,65 @@ def query_stockDetails(request):
     return JsonResponse(response)
 
 
-def show_stockDetails(request):
-    stockDetails=stock_details
-    ts_code=request.session.get('global_ts_code')
-    categoryData0, values0 = deal_Daily(ts_code)
-    categoryData1, values1 = deal_Weekly(ts_code)
-    categoryData2, values2 = deal_Monthly(ts_code)
-    return render(request, 'stockDetails.html', locals())
+# 获得股票基本面数据
+def del_daily_basic(ts_code):
+    trade_date = time.strftime('%Y%m%d', time.localtime(time.time()-86400))
+    print(trade_date)
+    df = pro.daily_basic(ts_code=ts_code, trade_date=trade_date)
+    temp_data = np.array(df)
+    daily_basic_data = temp_data.tolist()
+    print(daily_basic_data[0])
+    return daily_basic_data
 
 
+# 获得日线数据，提取日k线所需数据
 def deal_Daily(ts_code):
-    # 获得日线数据，提取日k线所需数据
     df = pro.daily(ts_code=ts_code, start_date='20180101')
     trade_date = df["trade_date"]
     k_line_data = df[["open", "close", "low", "high"]]
-    categoryData = trade_date.tolist()
-    categoryData=list(reversed(categoryData))
-    var1 = np.array(k_line_data)
-    values = var1.tolist()
+    temp_data = trade_date.tolist()
+    categoryData=list(reversed(temp_data))
+    temp_data = np.array(k_line_data)
+    values = temp_data.tolist()
     values=list(reversed(values))
     return (categoryData,values)
 
 
+# 获得周线数据，提取周k线所需数据
 def deal_Weekly(ts_code):
-    # 获得周线数据，提取周k线所需数据
     df = pro.weekly(ts_code=ts_code, start_date='20160101')
     trade_date = df["trade_date"]
     k_line_data = df[["open", "close", "low", "high"]]
-    categoryData = trade_date.tolist()
-    categoryData = list(reversed(categoryData))
-    var1 = np.array(k_line_data)
-    values = var1.tolist()
+    temp_data = trade_date.tolist()
+    categoryData = list(reversed(temp_data))
+    temp_data = np.array(k_line_data)
+    values = temp_data.tolist()
     values = list(reversed(values))
     return (categoryData, values)
 
 
+# 获得月线数据，提取月k线所需数据
 def deal_Monthly(ts_code):
-    # 获得月线数据，提取月k线所需数据
     df = pro.monthly(ts_code=ts_code, start_date='20140101')
     trade_date = df["trade_date"]
     k_line_data = df[["open", "close", "low", "high"]]
-    categoryData = trade_date.tolist()
-    categoryData = list(reversed(categoryData))
-    var1 = np.array(k_line_data)
-    values = var1.tolist()
+    temp_data = trade_date.tolist()
+    categoryData = list(reversed(temp_data))
+    temp_data = np.array(k_line_data)
+    values = temp_data.tolist()
     values = list(reversed(values))
     return (categoryData, values)
+
+
+def show_stockDetails(request):
+    stockDetails=stock_details
+    ts_code = request.session.get('global_ts_code')
+
+    categoryData0, values0 = deal_Daily(ts_code)
+    categoryData1, values1 = deal_Weekly(ts_code)
+    categoryData2, values2 = deal_Monthly(ts_code)
+    daily_basic_data = del_daily_basic(ts_code)
+    return render(request, 'stockDetails.html', locals())
 
 
 def main(request):

@@ -78,7 +78,7 @@ function show_k_line(data,type) {
         series: [   //图表类型
             {
                 name: type,
-                type: 'candlestick',    //K线图
+                type: 'candlestick',    //K线图，也可以表示为k
                 data: data.values,     //y轴对应的数据
                 ////////////////////////图标标注/////////////////////////////
                 markPoint: {    //图表标注
@@ -100,6 +100,7 @@ function show_k_line(data,type) {
                                 normal: {color: 'rgb(41,60,85)'}
                             }
                         },
+                        //k线图谱数据显示最大值和最小值以及平均值标志
                         {
                             name: 'highest value',
                             type: 'max',    //最大值
@@ -115,6 +116,7 @@ function show_k_line(data,type) {
                             type: 'average',
                             valueDim: 'close'   //收盘价
                         }
+
                     ],
                     tooltip: {      //提示框
                         formatter: function (param) {
@@ -123,41 +125,17 @@ function show_k_line(data,type) {
                     }
                 },
 
-/////////////////////////////////图标标线///////////////////////////
 
-                markLine: {
+                markLine: { //图标标线
                     symbol: ['none', 'none'],   //标线两端的标记类型
                     data: [
-                        [
-                            {
-                                name: 'from lowest to highest',
-                                type: 'min',    //设置该标线为最小值的线
-                                valueDim: 'lowest', //指定在哪个维度上的最小值
-                                symbol: 'circle',
-                                symbolSize: 10, //起点标记的大小
-                                label: {    //normal默认，emphasis高亮
-                                    normal: {show: false},  //不显示标签
-                                    emphasis: {show: false} //不显示标签
-                                }
-                            },
-                            {
-                                type: 'max',
-                                valueDim: 'highest',
-                                symbol: 'circle',
-                                symbolSize: 10,
-                                label: {
-                                    normal: {show: false},
-                                    emphasis: {show: false}
-                                }
-                            }
-                        ],
                         {
-                            name: 'min line on close',
+                            name: 'min line on close', //最小值标线
                             type: 'min',
                             valueDim: 'close'
                         },
                         {
-                            name: 'max line on close',
+                            name: 'max line on close',//最大值标线
                             type: 'max',
                             valueDim: 'close'
                         }
