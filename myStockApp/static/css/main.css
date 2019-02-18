@@ -1,0 +1,39 @@
+.my-stock{
+    position: absolute;
+    top: 30px;
+    left: 20px;
+    height:500px;
+    width: 200px;
+    border: 1px solid #609ab6;
+    background: #ffffff;
+}
+
+.large-market{
+    position: absolute;
+    top: 30px;
+    left: 245px;
+    height:500px;
+    width: 650px;
+    border: 1px solid #609ab6;
+    background: #ffffff;
+}
+
+.news{
+    position: absolute;
+    top: 30px;
+    left: 920px;
+    height:500px;
+    width: 250px;
+    border: 1px solid #609ab6;
+    background: #ffffff;
+}
+
+.stock-sequence{
+    position: absolute;
+    top: 550px;
+    left: 20px;
+    height:360px;
+    width: 1150px;
+    border: 1px solid #609ab6;
+    background: #ffffff;
+}

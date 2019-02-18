@@ -62,11 +62,10 @@ function show_k_line(data,type) {
         xAxis: [{
             type: 'category',   //坐标轴类型，类目轴
             data: data.categoryData,
-            //scale: true,  //只在数字轴中有效
+            minInterval:1,
             boundaryGap: false,    //刻度作为分割线，标签和数据点会在两个刻度上
             axisLine: {onZero: false},
             splitLine: {show: false},   //是否显示坐标轴轴线
-            //splitNumber: 20,    //坐标轴的分割段数，预估值，在类目轴中无效
             min: 'dataMin', //特殊值，数轴上的最小值作为最小刻度
             max: 'dataMax'  //特殊值，数轴上的最大值作为最大刻度
         },{

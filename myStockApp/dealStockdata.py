@@ -30,6 +30,44 @@ def show_searchResult(request):
     return render(request, 'searchResults.html',{'searchResults': stock_data})
 
 
+# stock涨跌序列排序
+def stock_fluctuation():
+    trade_date = time.strftime('%Y%m%d', time.localtime(time.time()))
+    df = pro.daily(trade_date='20190215')
+    data = df[['ts_code', 'pre_close', 'open', 'close', 'pct_chg']]
+    data = data.to_json(orient='index')
+    temp_data = json.loads(data)
+    stockList = []
+    for i in temp_data:
+        # dict转obj
+        class DicToObj:
+            def __init__(self, **entries):
+                self.__dict__.update(entries)
+
+        r = DicToObj(**temp_data[i])
+        stockList.append(r)
+
+    # ！！！！快排算法！！！！
+    def part(List, begin, end):
+        k = List[end].pct_chg
+        i = begin - 1
+        for j in range(begin, end):
+            if List[j].pct_chg <= k:
+                i += 1
+                List[j], List[i] = List[i], List[j]
+        List[end], List[i + 1] = List[i + 1], List[end]
+        return i + 1
+
+    def quickSort(List, left, right):
+        if left < right:
+            mid = part(List, left, right)
+            quickSort(List, left, mid - 1)
+            quickSort(List, mid + 1, right)
+
+    quickSort(stockList, 0, len(stockList) - 1)
+    # ！！！！快排算法！！！！
+
+
 def query_stockDetails(request):
     ts_code = request.POST.get('ts_code')
     request.session['global_ts_code'] = ts_code
@@ -135,6 +173,6 @@ def show_stockDetails(request):
 
 
 def main(request):
-    return render(request,"main.html")
+    return render(request, "main.html")
 
 

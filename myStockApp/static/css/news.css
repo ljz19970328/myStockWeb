@@ -1,0 +1,58 @@
+.select-source ul{
+    margin-left: 150px;
+    list-style:none;
+    padding: 0px;
+    width: auto;
+}
+.select-source ul li{
+    float:left;
+    height:80px;
+    width: 120px;
+    padding: 4px 20px;
+}
+.select-source ul li a{
+    width: 150px;
+    display: inline-block;
+    text-align: center
+}
+.logo1{
+    width: 150px;
+    height: 60px;
+    background: url("../image/sina.png");
+    background-size: 100% 100%;
+}
+.logo2{
+      width: 150px;
+    height: 60px;
+    background: url("../image/wallstreetcn.png");
+     background-size: 100% 100%;
+}
+.logo3{
+     width: 150px;
+    height: 60px;
+    background: url("../image/10jqka.png");
+     background-size: 100% 100%;
+}
+.logo4{
+     width: 150px;
+    height: 60px;
+    background: url("../image/eastmoney.png");
+     background-size: 100% 100%;
+}
+.logo5{
+      width: 150px;
+    height: 60px;
+    background: url("../image/yuncaijing.png");
+     background-size: 100% 100%;
+}
+
+.news-box{
+    height: 800px;
+    overflow-y: scroll;
+    float: left;
+}
+.news{
+    margin-top: 10px;
+    background: #ffffff;
+    border-bottom: 2px solid #a41515;
+}
