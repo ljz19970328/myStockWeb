@@ -4,6 +4,9 @@ from myStockApp.models import User
 from django.http import HttpResponseRedirect, HttpResponse, JsonResponse
 from django.template import RequestContext
 from django.shortcuts import render_to_response
+import smtplib
+from email.mime.text import MIMEText
+from email.header import Header
 from io import BytesIO
 import random
 from PIL import Image, ImageDraw, ImageFont
@@ -12,11 +15,15 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 
 def index(request):
+    # user1= request.session.get('userName')
+    print('12   =   ')
     return render(request, 'index.html')
+
 
 
 def login(request):
     # if request.method == "POST":
+    print('78988')
     if request.is_ajax():  # 判断是否ajax请求
         username = request.POST.get("user")
         pwd = request.POST.get("pwd")
@@ -24,6 +31,7 @@ def login(request):
         try:
             user = User.objects.get(name=username)
             if user.password == pwd:
+                request.session["islogin"]=username
                 response['user'] = user.name
                 return JsonResponse(response)
             else:
@@ -32,6 +40,7 @@ def login(request):
             response['err_msg'] = "用户名不存在"
         return JsonResponse(response)
     else:
+        # request.session['userName'] =request.POST.get("user")
         return render(request, "login.html")
 
 
@@ -111,5 +120,91 @@ def verify_code(request):
     return HttpResponse(buf.getvalue(), 'image/png')
 
 
+def callMaster(request):
+    print('55555555555')
+    if request.is_ajax():
+        email_info = request.POST.get('email_info')#输入框信息获取
+        userName11 = request.session.get('islogin')
+        userInfo=User.objects.get(name=userName11)#获取登陆用户邮箱
+        print('Email = '+userInfo.email)
+        if( userInfo.email!=""):
+         response = {"msg": ""}
+         sendMail(email_info,userInfo.email)#把输入框信息导入邮件def
+        else:
+          return render(request, "personCenter.html")
+    else:
+        print('44444444')
+        NULL=""
+        UserLoginIdd=request.session.get('islogin')#获取session中的登录验证用户名
+        print("UserLoginIdd : "+UserLoginIdd)
+        if(UserLoginIdd!=NULL):#判定用户是否登录，根据登录状态进入不同界面
+           return render(request, "callMaster.html")
+        else:
+            return render(request, "login.html")
+
+
+
+def sendMail(body,user_Email):
+    smtp_server = 'smtp.qq.com'
+    from_mail = '2774598919@qq.com'
+    mail_pass = 'sbeunviqnmsodefi'
+    to_mail = ['1401651730@qq.com', ]
+    cc_mail = [user_Email]
+    from_name = 'monitor'
+    subject = u'监控'.encode('gbk')   # 以gbk编码发送，一般邮件客户端都能识别
+#     msg = '''\
+# From: %s <%s>
+# To: %s
+# Subject: %s
+# %s''' %(from_name, from_mail, to_mail_str, subject, body)  # 这种方式必须将邮件头信息靠左，也就是每行开头不能用空格，否则报SMTP 554
+    mail = [
+        "From: %s <%s>" % (from_name, from_mail),
+        "To: %s" % ','.join(to_mail),   # 转成字符串，以逗号分隔元素
+        "Subject: %s" % subject,
+        "Cc: %s" % ','.join(cc_mail),
+        "",body
+        ]
+    msg = '\n'.join(mail)  # 这种方式先将头信息放到列表中，然后用join拼接，并以换行符分隔元素，结果就是和上面注释一样了
+    try:
+        s = smtplib.SMTP()
+        s.connect(smtp_server, '25')
+        s.login(from_mail, mail_pass)
+        s.sendmail(from_mail, to_mail+cc_mail, msg)
+        s.quit()
+    except smtplib.SMTPException as e:
+        print ("Error: %s" %e)
+if __name__ == "__main__":
+    sendMail(" HQQQQ     This is a test!")
+
+
+def personCenter(request):
+    if request.is_ajax():
+        print("2555586")
+        userName1 = request.POST.get('userName1')
+        passWord1 = request.POST.get('passWord1')
+        sex1 = request.POST.get('sex1')
+        email_Name1 = request.POST.get('email_Name1')
+        response = {"userName1": None, "err_msg": ""}
+        NULL=''
+        if User.objects.filter(name=userName1):
+            if userName1!=NULL and passWord1!=NULL and sex1!=NULL and email_Name1!=NULL:
+                try:
+                  User.objects.filter(name=userName1).update(password=passWord1, sex=sex1, email=email_Name1)
+                  print(userName1+" "+passWord1+" "+sex1+" "+email_Name1+" ")
+
+                  response['userName1'] = userName1
+                except:
+                    response['err_msg'] = "修改失败"
+            else:
+                response['err_msg'] = "请检查输入"
+        else:
+            response['err_msg'] = "用户名不存在"
+        return JsonResponse(response)
+    else:
+        print('12222882')
+        return render(request, "personCenter.html")
+
+
 def logout(request):
+    request.session["islogin"]=""
     return redirect('/index/')

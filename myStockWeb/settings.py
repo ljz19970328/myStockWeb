@@ -21,7 +21,6 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = 'y)ht8o(e5m7(-jg6%dw*m&4dsa8fb)70(gd5nzwds0xcmpvgq('
-
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
@@ -50,6 +49,14 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
+
+#缓存 redis memcache
+SESSION_ENGINE = 'django.contrib.sessions.backends.cached_db'        # 引擎
+
+
+#浏览器cook（相当于没有用session，又把敏感信息保存到客户端了）
+SESSION_ENGINE = 'django.contrib.sessions.backends.signed_cookies'   # 引擎
+SESSION_SERIALIZER = 'django.contrib.sessions.serializers.PickleSerializer'
 ROOT_URLCONF = 'myStockWeb.urls'
 
 TEMPLATES = [

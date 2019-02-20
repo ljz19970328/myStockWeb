@@ -20,11 +20,11 @@
 
             <div class="span1"><a href="" target="contentIframe">我的收藏</a></div>
 
-               <!--  <div class="span1"> <a href="/callMaster/" target="contentIframe">与我联系</a></div>
+                <div class="span1"> <a href="/callMaster/" target="contentIframe">与我联系</a></div>
 
-              <div class="span1"><a href="/help/" target="contentIframe">帮助</a></div>!-->
+              <div class="span1"><a href="/personCenter/" target="contentIframe">帮助</a></div>
 
-            <div class="span2"><div class="login-logo"></div> <a href="/register/" >登录</a></div>
+            <div class="span2"><div class="login-logo"></div> <a href="/login/" >登录</a></div>
 
             {% csrf_token %}
             <input name="stock_info" id="search-input" class="search-input"></input>
@@ -43,6 +43,7 @@
         </div>
         <script>
         $("#search-btn").click(function () {
+            alert('AAAAAAAAA')
             $.ajax({
                 url:"/search/",
                 type:"post",
@@ -64,6 +65,9 @@
                 }
             })
         });
+        function checkIfLogin() {
+
+        }
     </script>
     </body>
 </html>
