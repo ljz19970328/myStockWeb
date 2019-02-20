@@ -22,9 +22,9 @@
 
                 <div class="span1"> <a href="/callMaster/" target="contentIframe">与我联系</a></div>
 
-              <div class="span1"><a href="/personCenter/" target="contentIframe">帮助</a></div>
+              <div class="span1"><a href="" target="contentIframe">帮助</a></div>
 
-            <div class="span2"><div class="login-logo"></div> <a href="/login/" >登录</a></div>
+            <div class="span2" id="showbox0"></div>
 
             {% csrf_token %}
             <input name="stock_info" id="search-input" class="search-input"></input>
@@ -42,8 +42,39 @@
                 <span>Copyright2019杨洋.AllRightsReserved</span>
         </div>
         <script>
+
+         $(document).ready(function () {
+            $.ajax({
+                url:"/loginCheck/",
+                type:"post",
+            // data发送urlencoded格式就行，数据没那么深，没必要发json格式
+                data:{
+                    stock_info:$("#search-input").val(),
+                    csrfmiddlewaretoken:$("[name='csrfmiddlewaretoken']").val()
+                },
+                success:function(response) {
+                   // console.log(response);
+                   if(response.userName1){
+                    // 已登录
+                    //<div class="login-logo"></div> <a href="/login/" >登录</a>
+                      hrefName=response.userName1;
+                       htmlUrl="<div class="+"login-logo"+"></div>"+'<a href="/personCenter/"  target="contentIframe">'+hrefName+'</a>'
+                      // var str = '<a href=""></a>';
+                    $("#showbox0").html(htmlUrl);
+                }
+                else{
+                    // 未登录
+                     alert("您未登录，请登录！")
+                       hrefName1="登录"
+                       htmlUrl="<div class="+"login-logo"+"></div>"+'<a href="/login/">'+hrefName1+'</a>'
+                     $("#showbox0").html(htmlUrl);
+                    $("#error").html(response.err_msg)
+                }
+                }
+            })
+    });
+
         $("#search-btn").click(function () {
-            alert('AAAAAAAAA')
             $.ajax({
                 url:"/search/",
                 type:"post",

@@ -32,8 +32,35 @@
                 <span>Copyright2019杨洋.AllRightsReserved</span>
         </div>
         <script>
+             $(document).ready(function () {
+            $.ajax({
+                url:"/perAdd/",
+                type:"post",
+            // data发送urlencoded格式就行，数据没那么深，没必要发json格式
+                data:{
+                    stock_info:$("#search-input").val(),
+                    csrfmiddlewaretoken:$("[name='csrfmiddlewaretoken']").val()
+                },
+                success:function(response) {
+                   // console.log(response);
+                   if(response.userName1){
+                    // 已登录
+                      $("#userName").val(response.userName1)
+                       $("#passWord").val(response.password1)
+                       $("#sex").val(response.sex1)
+                       $("#email_Name").val(response.email1)
+                }
+                else{
+                    // 未登录
+                    alert('failure')
+                    $("#error").html(response.err_msg)
+                }
+                }
+            })
+    });
+
         $("#change-btn").click(function () {
-            alert('HQ')
+            alert('正在修改')
             $.ajax({
                 url:"/personCenter/",
                 type:"post",

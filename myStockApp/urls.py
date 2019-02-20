@@ -11,6 +11,8 @@ urlpatterns = [
     url(r'^register/', views.register),
     url(r'^index/', views.index),
     url(r'^logout/', views.logout),
+    url(r'^perAdd/', views.perAdd),
+    url(r'^loginCheck/', views.loginCheck),
     url(r'^callMaster/', views.callMaster),
     url(r'^personCenter/', views.personCenter),
 

@@ -15,15 +15,11 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 
 def index(request):
-    # user1= request.session.get('userName')
-    print('12   =   ')
     return render(request, 'index.html')
 
 
 
 def login(request):
-    # if request.method == "POST":
-    print('78988')
     if request.is_ajax():  # 判断是否ajax请求
         username = request.POST.get("user")
         pwd = request.POST.get("pwd")
@@ -32,6 +28,7 @@ def login(request):
             user = User.objects.get(name=username)
             if user.password == pwd:
                 request.session["islogin"]=username
+                request.session.set_expiry(0)
                 response['user'] = user.name
                 return JsonResponse(response)
             else:
@@ -121,22 +118,21 @@ def verify_code(request):
 
 
 def callMaster(request):
-    print('55555555555')
     if request.is_ajax():
         email_info = request.POST.get('email_info')#输入框信息获取
         userName11 = request.session.get('islogin')
         userInfo=User.objects.get(name=userName11)#获取登陆用户邮箱
-        print('Email = '+userInfo.email)
+        # response = {"user": None, "err_msg": ""}
+        response = {"err_msg": ""}
         if( userInfo.email!=""):
-         response = {"msg": ""}
-         sendMail(email_info,userInfo.email)#把输入框信息导入邮件def
+            sendMail(email_info,userInfo.email)#把输入框信息导入邮件def
+            return render(request, "index.html")
         else:
-          return render(request, "personCenter.html")
+            response["err_msg"] = "邮箱为空，请添加邮箱"
+            return render(request, "personCenter.html")
     else:
-        print('44444444')
         NULL=""
         UserLoginIdd=request.session.get('islogin')#获取session中的登录验证用户名
-        print("UserLoginIdd : "+UserLoginIdd)
         if(UserLoginIdd!=NULL):#判定用户是否登录，根据登录状态进入不同界面
            return render(request, "callMaster.html")
         else:
@@ -179,7 +175,6 @@ if __name__ == "__main__":
 
 def personCenter(request):
     if request.is_ajax():
-        print("2555586")
         userName1 = request.POST.get('userName1')
         passWord1 = request.POST.get('passWord1')
         sex1 = request.POST.get('sex1')
@@ -201,8 +196,39 @@ def personCenter(request):
             response['err_msg'] = "用户名不存在"
         return JsonResponse(response)
     else:
-        print('12222882')
         return render(request, "personCenter.html")
+
+def loginCheck(request):
+    if request.is_ajax():
+        response = {"userName1": None, "err_msg": ""}
+        userNamee=request.session.get("islogin")
+        NULL=''
+        if User.objects.filter(name=userNamee):
+            response['userName1'] = userNamee
+        else:
+            response['err_msg'] = "用户名不存在"
+        return JsonResponse(response)
+    else:
+        return render(request, "personCenter.html")
+
+
+def perAdd(request):
+    if request.is_ajax():
+        response = {"userName1": None, "err_msg": ""}
+        userNamee=request.session.get("islogin")
+        NULL=''
+        if User.objects.filter(name=userNamee):
+            userInfomor = User.objects.get(name=userNamee)
+            response['userName1'] = userNamee
+            response['password1'] = userInfomor.password
+            response['sex1'] = userInfomor.sex
+            response['email1'] = userInfomor.email
+        else:
+            response['err_msg'] = "用户名不存在"
+        return JsonResponse(response)
+    else:
+        return render(request, "personCenter.html")
+
 
 
 def logout(request):
