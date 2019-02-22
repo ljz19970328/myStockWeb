@@ -3,6 +3,9 @@ import numpy as np
 from django.http import JsonResponse
 from django.shortcuts import render, redirect, render_to_response
 import json
+
+from pandas import DataFrame
+
 from myStockApp.models import Stock
 from myStockApp.models import StockDetails
 import tushare as ts
@@ -117,13 +120,14 @@ def deal_Daily(ts_code):
     # 获得成交量序列
     temp_data = vol.tolist()
     volume = list(reversed(temp_data))
+    macd, dea, diff = cal_macd(df, ts_code, '20180101')
     # 返回值
-    return (categoryData,values,volume)
+    return (categoryData,values,volume,macd,dea,diff)
 
 
 # 获得周线数据，提取周k线所需数据
 def deal_Weekly(ts_code):
-    df = pro.weekly(ts_code=ts_code, start_date='20160101')
+    df = pro.weekly(ts_code=ts_code, start_date='20130101')
     trade_date = df["trade_date"]
     k_line_data = df[["open", "close", "low", "high"]]
     vol = df["vol"]
@@ -137,13 +141,14 @@ def deal_Weekly(ts_code):
     # 获得成交量序列
     temp_data = vol.tolist()
     volume = list(reversed(temp_data))
+    macd, dea, diff = cal_macd(df, ts_code, '20160101')
     # 返回值
-    return(categoryData, values, volume)
+    return(categoryData, values, volume,macd,dea,diff)
 
 
 # 获得月线数据，提取月k线所需数据
 def deal_Monthly(ts_code):
-    df = pro.monthly(ts_code=ts_code, start_date='20140101')
+    df = pro.monthly(ts_code=ts_code, start_date='19910101')
     trade_date = df["trade_date"]
     k_line_data = df[["open", "close", "low", "high"]]
     vol = df["vol"]
@@ -157,17 +162,44 @@ def deal_Monthly(ts_code):
     # 获得成交量序列
     temp_data = vol.tolist()
     volume = list(reversed(temp_data))
+    macd, dea, diff = cal_macd(df, ts_code, '20000101')
     # 返回值
-    return (categoryData, values, volume)
+    return (categoryData, values, volume, macd, dea, diff)
+
+
+def cal_macd(data,ts_code,start_data):
+
+    # data是包含高开低收成交量的标准dataframe
+    # short_,long_,m分别是macd的三个参数
+    # 返回值是diff,dea,macd三个list
+
+    short_ = 12
+    long_ = 26
+    m = 9
+    data = data.reindex(index=data.index[::-1])
+    data['diff'] = data['close'].ewm(adjust=False,alpha=2/(short_+1),ignore_na=True).mean()-\
+                data['close'].ewm(adjust=False,alpha=2/(long_+1),ignore_na=True).mean()
+    data['dea'] = data['diff'].ewm(adjust=False,alpha=2/(m+1),ignore_na=True).mean()
+    data['macd'] = 2*(data['diff']-data['dea'])
+    # 获得macd列表
+    vol1 = data["macd"]
+    macd = vol1.tolist()
+    # 获得dea列表
+    vol2 = data["dea"]
+    dea = vol2.tolist()
+    # 获得diff列表
+    vol3 = data["diff"]
+    diff = vol3.tolist()
+    return(macd,dea,diff)
 
 
 def show_stockDetails(request):
     stockDetails=stock_details
     ts_code = request.session.get('global_ts_code')
     # 创建本地变量
-    categoryData0, values0, volume0 = deal_Daily(ts_code)
-    categoryData1, values1,volume1 = deal_Weekly(ts_code)
-    categoryData2, values2 ,volume2= deal_Monthly(ts_code)
+    categoryData0, values0, volume0, macd0, dea0, diff0 = deal_Daily(ts_code)
+    categoryData1, values1, volume1, macd1, dea1, diff1 = deal_Weekly(ts_code)
+    categoryData2, values2, volume2, macd2, dea2, diff2 = deal_Monthly(ts_code)
     daily_basic_data = del_daily_basic(ts_code)
     return render(request, 'stockDetails.html', locals())
 

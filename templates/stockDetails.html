@@ -61,19 +61,28 @@
     var data0 =  {
         categoryData: {{ categoryData0 |safe}}, //数组中的日期 x轴对应的日期
         values: {{ values0|safe }},           //数组中的数据 y轴对应的数据，open,close,high,low
-        volumes:{{ volume0|safe }}     //成交量 vol
+        volumes:{{ volume0|safe }},    //成交量 vol
+        macd: {{macd0 | safe}},
+        dea: {{ dea0 | safe}},
+        diff: {{ diff0 | safe}}
     };
 
     var data1 =  {
         categoryData: {{ categoryData1 |safe}}, //数组中的日期 x轴对应的日期
         values: {{ values1|safe }},             //数组中的数据 y轴对应的数据
-        volumes:{{ volume1|safe }}     //成交量 vol
+        volumes:{{ volume1|safe }} ,    //成交量 vol
+        macd: {{macd1 | safe}},
+        dea: {{ dea1 | safe}},
+        diff: {{ diff1 | safe}}
     };
 
     var data2 =  {
         categoryData: {{ categoryData2 |safe}}, //数组中的日期 x轴对应的日期
         values: {{ values2|safe }} ,            //数组中的数据 y轴对应的数据
-        volumes:{{ volume2|safe }}     //成交量 vol
+        volumes:{{ volume2|safe }} ,    //成交量 vol
+        macd: {{macd2 | safe}},
+        dea: {{ dea2 | safe}},
+        diff: {{ diff2 | safe}}
     };
     $(function(){
         show_k_line(data0,'日k线')

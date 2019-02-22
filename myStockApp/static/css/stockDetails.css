@@ -13,7 +13,7 @@
     line-height: 35px;
     display: -webkit-box;
     -webkit-box-orient: vertical;
-    -webkit-line-clamp: 12;
+    -webkit-line-clamp: 9;
     overflow: hidden;
 }
 
@@ -74,7 +74,7 @@
 .K-line-box{
     background: #ffffff;
     width: 900px;
-    height: 600px;
+    height: 700px;
     float: left;
     border: 1px solid #1db5c9;
     border-top: 2px solid #003366;

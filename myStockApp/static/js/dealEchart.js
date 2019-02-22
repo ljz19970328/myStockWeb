@@ -40,7 +40,7 @@ function show_k_line(data,type) {
             show: true,
             left: '7%',    //grid组件离容器左侧的距离
             right: '3%',
-            height:'70%',
+            height:'60%',
             top:'8%',
             backgroundColor:'#ccc'
         }, {     //直角坐标系vol
@@ -48,16 +48,16 @@ function show_k_line(data,type) {
             left: '7%',    //grid组件离容器左侧的距离
             right: '3%',
             height:'15%',
-            top:'79%',
+            top:'69%',
             backgroundColor:'#ccc'
-        }/*, {     //直角坐标系macd
+        }, {     //直角坐标系macd
             show: true,
             left: '7%',    //grid组件离容器左侧的距离
             right: '3%',
-            height:'13%',
-            top:'81%',
+            height:'11%',
+            top:'85%',
             backgroundColor:'#ccc'
-        }*/
+        }
         ],
         xAxis: [{
             type: 'category',   //坐标轴类型，类目轴
@@ -73,12 +73,12 @@ function show_k_line(data,type) {
       gridIndex: 1,
       data: data.categoryData,
       axisLabel: {show: false}
-  }/*,{
+  },{
       type: 'category',
       gridIndex: 2,
       data: data.categoryData,
       axisLabel: {show: false}
-  }*/],
+  }],
         yAxis: [{
             scale: true,    //坐标刻度不强制包含零刻度
             splitArea: {
@@ -91,14 +91,14 @@ function show_k_line(data,type) {
       axisTick: {show: false},
       splitLine: {show: false},
       axisLabel: {show: true}
-  }/*,{
+  },{
 	  gridIndex: 2,
       splitNumber: 4,
       axisLine: {onZero: false},
       axisTick: {show: false},
       splitLine: {show: false},
       axisLabel: {show: true}
-  }*/],
+  }],
         dataZoom: [     //用于区域缩放
             {
                 filterMode: 'filter',    //当前数据窗口外的数据被过滤掉来达到数据窗口缩放的效果  默认值filter
@@ -112,17 +112,17 @@ function show_k_line(data,type) {
                 type: 'slider', //滑动条型数据区域缩放组件
                 xAxisIndex: [0, 1],
                 y: '90%',
-                top: '95%',
+                top: '96%',
                 start: 50,
                 end: 100,
                 
-            }/*,{
+            },{
             show: false,
                 xAxisIndex: [0, 2],
                 type: 'slider',
                 start: 50,
                 end: 100
-        }*/
+        }
         ],
         series: [   //图表类型
             {
@@ -248,12 +248,12 @@ function show_k_line(data,type) {
 		      }
 	      }
       }
-      /*,{
+      ,{
           name: 'MACD',
           type: 'bar',
           xAxisIndex: 2,
           yAxisIndex: 2,
-          data: data.macds,
+          data: data.macd,
           itemStyle: {
 	    	  normal: {
 		          color: function(params) {
@@ -272,14 +272,14 @@ function show_k_line(data,type) {
           type: 'line',
           xAxisIndex: 2,
           yAxisIndex: 2,
-          data: data.difs
+          data: data.diff
       },{
           name: 'DEA',
           type: 'line',
           xAxisIndex: 2,
           yAxisIndex: 2,
-          data: data.deas
-      }*/
+          data: data.dea
+      }
         ]
     };
     // 使用刚指定的配置项和数据显示图表

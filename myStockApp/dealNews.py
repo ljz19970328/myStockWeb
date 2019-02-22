@@ -10,6 +10,7 @@ pro = ts.pro_api()
 def show_news(request):
     endDate = time.strftime('%Y%m%d', time.localtime(time.time()+86400))
     startDate = time.strftime('%Y%m%d', time.localtime(time.time()-86400*2)) # 只要跨度三天的新闻
+
     df = pro.news(src='sina', start_date=startDate, end_date=endDate)
     data = df.to_json(orient='index')  # dataframe转json
     temp_data = json.loads(data)
