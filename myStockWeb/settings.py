@@ -21,7 +21,6 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = 'y)ht8o(e5m7(-jg6%dw*m&4dsa8fb)70(gd5nzwds0xcmpvgq('
-
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
@@ -37,6 +36,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    "myStockApp"
 ]
 
 MIDDLEWARE = [
@@ -49,6 +49,14 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
+
+#缓存 redis memcache
+SESSION_ENGINE = 'django.contrib.sessions.backends.cached_db'        # 引擎
+
+
+#浏览器cook（相当于没有用session，又把敏感信息保存到客户端了）
+SESSION_ENGINE = 'django.contrib.sessions.backends.signed_cookies'   # 引擎
+SESSION_SERIALIZER = 'django.contrib.sessions.serializers.PickleSerializer'
 ROOT_URLCONF = 'myStockWeb.urls'
 
 TEMPLATES = [
@@ -104,9 +112,9 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/2.1/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'zh-hans'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'Asia/Shanghai'
 
 USE_I18N = True
 
@@ -118,4 +126,7 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.1/howto/static-files/
 
-STATIC_URL = '/static/'
+STATIC_URL = '/myStockApp/static/'
+STATICFILES_DIRS = (
+    os.path.join(BASE_DIR, "/myStockApp/static"),
+)

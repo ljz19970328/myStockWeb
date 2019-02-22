@@ -1,0 +1,142 @@
+/*尺寸统一为1200*auto*/
+body {
+    height: 100%;
+    width: 100%;
+    background: #ebeff0;
+    margin: 0px;
+}
+.mainMenu{
+    width: 100%;
+    height:72px;
+    background-color: #252525;
+
+}
+.fixed{
+    position: fixed;
+    top: 0;
+    z-index: 900;
+}
+.web-name{
+    align-content: center;
+    float: left;
+    font-size: 22px;
+    width: 150px;
+    color: #dad9d6;
+
+}
+.web-logo{
+    float: left;
+    margin-left: 30px;
+    height: 72px;
+    width: 145px;
+    background: url("../image/logo2.png");
+    background-size: 100% 100%;
+}
+.span2{
+    position: absolute;
+    height:30px;
+    width: auto;
+    right: 50px;
+    line-height: 30px;
+    top: 5px;
+    color: #dad9d6;
+}
+.span2 span{
+    margin-top: 2px;
+}
+.span2 a{
+    font-size: 16px;
+    color: #dad9d6;
+    text-decoration:none;
+}
+.span2 a:hover{
+    color:#ffffff;
+    text-decoration:underline;
+}
+.login-logo{
+    float: left;
+    height: 30px;
+    width: 30px;
+    margin-top: -3px;
+    z-index: 900;
+    background: url("../image/login.png");
+    background-size: 100% 100%;
+}
+.web-name{
+    float: left;
+}
+.span1{
+    height:42px;
+    width: auto;
+    float: left;
+    margin-left:50px;
+    margin-top: 20px;
+    line-height: 42px;
+    color: #dad9d6;
+
+}
+.span1 a{
+    font-size: 18px;
+    color:#dad9d6;
+    text-decoration:none;
+}
+.span1 a:hover{
+    color:#ffffff;
+    text-decoration:underline;
+}
+.span1 a:active{
+    color:#03F
+}
+
+
+.search-input{
+    margin-top:30px ;
+    height:30px;
+    width: 150px;
+    position: absolute;
+    border: solid 1px #bbccdd;
+    font-size: 16px;
+    left:900px;
+}
+.search-btn{
+    margin-top:30px ;
+    height:30px;
+    width: 60px;
+    position: absolute;
+    border: solid 1px #bbccdd;
+    left:1050px;
+}
+
+.content{
+    position: absolute;
+    top: 82px;
+    left:50%;
+    margin-left:-600px;
+    width: 1200px;
+    height: 960px;
+    border-top: 0px;
+}
+
+.content-iframe{
+    position: absolute;
+    height:960px;
+    width: 1200px;
+    border-width: 0px;
+    scrolling:auto;
+}
+.footer{
+    position: absolute;
+    top:1040px;
+    width: 100%;
+    height:60px;
+    border-top: 1px solid #dad9d6;
+    background: #ffffff;
+
+}
+.footer span{
+    line-height: 60px;
+    font-size: 16px;
+    text-align: center;
+    display:block;
+    color:#000000;
+}

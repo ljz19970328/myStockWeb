@@ -1,0 +1,82 @@
+.company-profile{
+    margin-top: 20px;
+    font-size: 14px;
+    width: 200px;
+    min-height: 650px;
+    max-height: 960px;
+    height: auto;
+    float: left ;
+    background: #ffffff;
+    border: 1px solid #1db5c9;
+}
+.company-profile p{
+    line-height: 35px;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 12;
+    overflow: hidden;
+}
+
+.profile-title{
+    line-height: 50px;
+    width: 200px;
+    height: 50px;
+    font-size: 20px;
+    color: #1db5c9;
+    background: url("../image/profileTitle.jpg");
+}
+
+.operation{
+    background: #ffffff;
+    line-height: 40px;
+    margin-left: 30px;
+    margin-top: 30px;
+    width: 900px;
+    height: 40px;
+    float: left;
+    border: 1px solid #1db5c9;
+    border-bottom: 0px;
+}
+.span3{
+    float:left;
+    margin-left:20px;
+}
+.span3:hover{
+    cursor: pointer;
+    color:#0bc5de;
+}
+.daily_basic_box{
+    background: #ffffff;
+    width: 900px;
+    height: 100px;
+    float: left;
+    margin-left: 30px;
+    margin-top:40px;
+}
+.daily_basic_data{
+    border-collapse: collapse;
+}
+
+.element{
+    height: 50px;
+    font-size: 14px;
+    border: 1px solid #0bc5de;
+    text-align: center;
+}
+
+.value{
+    min-height: 50px;
+    font-size: 14px;
+    border: 1px solid #0bc5de;
+    text-align: center;
+}
+
+.K-line-box{
+    background: #ffffff;
+    width: 900px;
+    height: 600px;
+    float: left;
+    border: 1px solid #1db5c9;
+    border-top: 2px solid #003366;
+    margin-left: 30px;
+}

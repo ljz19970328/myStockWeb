@@ -1,4 +1,4 @@
-#!D:\JetBrains\project\myStockWeb\venv\Scripts\python.exe
+#!D:\JetBrains\project\untitled\venv\Scripts\python.exe
 # EASY-INSTALL-ENTRY-SCRIPT: 'pip==10.0.1','console_scripts','pip'
 __requires__ = 'pip==10.0.1'
 import re
