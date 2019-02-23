@@ -286,6 +286,67 @@ function show_k_line(data,type) {
     myChart.setOption(option);
 }
 
+function show_calendar(data){
+var dateList = data.dateList
+
+var Data = [];
+for (var i = 0; i < dateList.length; i++) {
+    Data.push([
+        dateList[i],
+        1
+    ]);
+}
+option = {
+    visualMap: {
+                show: false,
+                min: 0,
+                max: 300,
+                calculable: true,
+                seriesIndex: [2],
+                orient: 'horizontal',
+                left: 'center',
+                bottom: 0,
+                inRange: {
+                    color: ['#fff', '#fff']
+                }
+            },
+    calendar: [{
+        left: 'center',
+        top: 'middle',
+        cellSize: [40, 40],
+        yearLabel: {show: false},
+        orient: 'vertical',
+        dayLabel: {
+            firstDay: 1,
+            nameMap: 'cn'
+        },
+        range: '2019-02'
+    }],
+
+    series: [{
+        type: 'scatter',
+        coordinateSystem: 'calendar',
+        symbolSize: 20,
+        label: {
+            normal: {
+                show: true,
+                formatter: function (params) {
+                    var d = echarts.number.parseDate(params.value[0]);
+                    return d.getDate();
+                },
+                textStyle: {
+                    color: '#000'
+                }
+            }
+        },
+        data: Data
+    }
+]
+};
+}
+
+
+
 function show_k_line_yuan(data,type) {
     var myChart = echarts.init(document.getElementById('K-line-box'));
     //计算MA平均线，N日移动平均线=N日收盘价之和/N  dayCount要计算的天数(5,10,20,30)

@@ -85,17 +85,29 @@ def del_daily_basic(ts_code):
     stamp = time.time()  # 获取当前时间戳
     date = time.localtime(stamp)  # 利用localtime()转换为时间数组
     hour = int(time.strftime('%H', date))
-    if hour > 15:
-        # 时间戳为当天
-        trade_date = time.strftime('%Y%m%d', date)  # 没有跟新的话时间戳减一天
-    elif hour <= 15:
-        # 时间戳为前一天
-        trade_date = time.strftime('%Y%m%d', time.localtime(stamp - 86400))  # 没有跟新的话时间戳减一天
+    day = (time.strftime('%a', date))
+    if day != 'Sat' or day != 'Sun' or day != 'Mon':
+        if hour > 15:
+            # 时间戳为当天
+            trade_date = time.strftime('%Y%m%d', date)  # 没有跟新的话时间戳减一天
+        elif hour <= 15:
+            # 时间戳为前一天
+            trade_date = time.strftime('%Y%m%d', time.localtime(stamp - 86400))  # 没有跟新的话时间戳减一天
+    if day == 'Sat':
+        trade_date = time.strftime('%Y%m%d', time.localtime(stamp - 86400))  # 周六无数据，则取周五，时间戳减一天
+    if day == 'Sun':
+        trade_date = time.strftime('%Y%m%d', time.localtime(stamp - 86400*2))  # 周日无数据，则取周五，时间戳减二天
+    if day == 'Mon':
+        if hour > 15:
+            # 时间戳为当天
+            trade_date = time.strftime('%Y%m%d', date)  # 没有跟新的话时间戳减一天
+        elif hour <= 15:
+            # 时间戳为上周五
+            trade_date = time.strftime('%Y%m%d', time.localtime(stamp - 86400*3))  # 周一没有跟新的话时间戳减三天
     df = pro.daily_basic(ts_code=ts_code, trade_date=trade_date)
     data = df.to_json(orient='index')  # dataframe转json
     temp_data = json.loads(data)  # json转dict
     daily_basic_data = temp_data['0']  # dic 取第一条记录
-
     # dict转obj
     class DicToObj:
         def __init__(self, **entries):
