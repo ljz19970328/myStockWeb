@@ -9,17 +9,33 @@
      <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     </head>
 <body>
+{% csrf_token %}
 <div id="calendar-box" style="height:270px; width: 340px;border: 1px solid; "></div>
 <div class="select-source">
     <ul>
-        <li name="sina"><div class="logo1"></div><a>新浪财经</a></li>
-        <li name="wallstreetcn"><div class="logo2"></div><a>华尔街见闻</a></li>
-        <li name="10jqka"><div class="logo3"></div><a>同花顺</a></li>
-        <li name="eastmoney"><div class="logo4"></div><a>东方财富</a></li>
-        <li name="yuncaijing"><div class="logo5"></div><a>云财经</a></li>
+        <li name="sina">
+            <div class="logo1" id="sina" onclick='show_news(this.id)'></div>
+            <a  id="sina" onclick='show_news(this.id)' >新浪财经</a>
+        </li>
+        <li name="wallstreetcn">
+            <div class="logo2" id="wallstreetcn" onclick='show_news(this.id)'></div>
+            <a id="wallstreetcn" onclick='show_news(this.id)'>华尔街见闻</a>
+        </li>
+        <li name="10jqka">
+            <div class="logo3" id="10jqka" onclick='show_news(this.id)'></div >
+            <a id="10jqka" onclick='show_news(this.id)'>同花顺</a>
+        </li>
+        <li name="eastmoney">
+            <div class="logo4" id="eastmoney" onclick='show_news(this.id)'></div>
+            <a id="eastmoney" onclick='show_news(this.id)'>东方财富</a>
+        </li>
+        <li name="yuncaijing">
+            <div class="logo5" id="yuncaijing" onclick='show_news(this.id)'></div>
+            <a id="yuncaijing" onclick='show_news(this.id)'>云财经</a>
+        </li>
     </ul>
 </div>
-<div class="news-box">
+<div id="news-box" class="news-box">
 {% for new in news %}
     <div class="news">
     <p>{{ new.title }}</p>
@@ -31,17 +47,51 @@
 </body>
 <script>
     var myChart = echarts.init(document.getElementById('calendar-box'));
-    var date =  {
+    var now_date='2019-2-24'
+    var src ='sina'
+    var date = {
         dateList: {{ dateList |safe}}
-    };
+    }
+
      $(function() {
          show_calendar(date)
-         myChart.setOption(option);
      })
+
      myChart.on('click', function (params) {
+         now_date =  params.value[0]
+         show_news(src)
+     });
 
-               alert(params.value[0])
+    function show_news(id){
+        src=id
+        $.ajax({
+                url:"/get_news/",
+                type:"post",
+                // data发送urlencoded格式就行，数据没那么深，没必要发json格式
+                data:{
+                    src_id:src,
+                    news_date:now_date,
+                    csrfmiddlewaretoken:$("[name='csrfmiddlewaretoken']").val()
+                },
+                success:function(response) {
+                   var news=JSON.parse(response); //可以将json字符串转换成json对象
+                    $("#news-box").html('')
+                   for( var i in news ) {
+                      htmlStr= '<div class="news">' +
+                       '<p>' + news[i].title + '</p>' +
+                       '<p>' + news[i].content + '</p>' +
+                       '<p>' + news[i].datetime + '</p>' +
+                       '</div>'
+                       $("#news-box").append(htmlStr)
+                   }
 
-                    });
+
+
+                }
+        })
+    }
+
+
+
 </script>
 </html>
