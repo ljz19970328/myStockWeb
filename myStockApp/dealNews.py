@@ -10,10 +10,11 @@ pro = ts.pro_api()
 
 
 def show_news(request):
-    datevalues = get_calendar()
+    dateValues = get_calendar()
+    todayDate = str(dateValues[-1])
     endDate = time.strftime('%Y%m%d', time.localtime(time.time() + 86400))
     startDate = time.strftime('%Y%m%d', time.localtime(time.time() - 86400))  # 只要跨度一天的新闻>80条
-    df = pro.news(src='eastmoney', start_date=startDate, end_date=endDate)
+    df = pro.news(src='sina', start_date=startDate, end_date=endDate)
     data = df.to_json(orient='index')  # dataframe转json
     temp_data = json.loads(data)
     new_list = []
@@ -24,7 +25,7 @@ def show_news(request):
                 self.__dict__.update(entries)
         r = DicToObj(**temp_data[i])
         new_list.append(r)
-    return render(request, 'news.html', {'news': new_list, 'dateList': datevalues})
+    return render(request, 'news.html', {'news': new_list, 'dateList': dateValues, 'todayDate': json.dumps(todayDate)})
 
 
 def get_news(request):

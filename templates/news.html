@@ -10,32 +10,48 @@
     </head>
 <body>
 {% csrf_token %}
-<div id="calendar-box" style="height:270px; width: 340px;border: 1px solid; "></div>
+<div class="news-logo"></div>
+<div class="calendar" id="calendar-box"></div>
+<div class="countplate" id="countplate">
+    <span class="number">欢迎使用</span>'
+</div>
+
 <div class="select-source">
     <ul>
         <li name="sina">
-            <div class="logo1" id="sina" onclick='show_news(this.id)'></div>
+            <div class="logo1" id="sina" onclick='show_news(this.id)'>
+                <img src="{% static "/image/sina.png" %}" >
+            </div>
             <a  id="sina" onclick='show_news(this.id)' >新浪财经</a>
         </li>
         <li name="wallstreetcn">
-            <div class="logo2" id="wallstreetcn" onclick='show_news(this.id)'></div>
+            <div class="logo2" id="wallstreetcn" onclick='show_news(this.id)'>
+                <img src="{% static "/image/wallstreetcn.png" %}" >
+            </div>
             <a id="wallstreetcn" onclick='show_news(this.id)'>华尔街见闻</a>
         </li>
         <li name="10jqka">
-            <div class="logo3" id="10jqka" onclick='show_news(this.id)'></div >
+            <div class="logo3" id="10jqka" onclick='show_news(this.id)'>
+                <img src="{% static "/image/10jqka.png" %}">
+            </div >
             <a id="10jqka" onclick='show_news(this.id)'>同花顺</a>
         </li>
         <li name="eastmoney">
-            <div class="logo4" id="eastmoney" onclick='show_news(this.id)'></div>
+            <div class="logo4" id="eastmoney" onclick='show_news(this.id)'>
+                <img src="{% static "/image/eastmoney.png" %}" >
+            </div>
             <a id="eastmoney" onclick='show_news(this.id)'>东方财富</a>
         </li>
         <li name="yuncaijing">
-            <div class="logo5" id="yuncaijing" onclick='show_news(this.id)'></div>
+            <div class="logo5" id="yuncaijing" onclick='show_news(this.id)'>
+                <img src="{% static "/image/yuncaijing.png" %}">
+            </div>
             <a id="yuncaijing" onclick='show_news(this.id)'>云财经</a>
         </li>
     </ul>
 </div>
 <div id="news-box" class="news-box">
+<!--<div id="source" style="width: 200px;height: 50px"></div>!-->
 {% for new in news %}
     <div class="news">
     <p>{{ new.title }}</p>
@@ -47,19 +63,19 @@
 </body>
 <script>
     var myChart = echarts.init(document.getElementById('calendar-box'));
-    var now_date='2019-2-24'
-    var src ='sina'
-    var date = {
-        dateList: {{ dateList |safe}}
-    }
+    var todayDate={{ todayDate |safe }} //全局变量，先赋值为当天日期
+    var src= 'sina' //全局变量，先赋值为新浪网
 
      $(function() {
-         show_calendar(date)
+         var date = {
+            dateList: {{ dateList |safe}},
+    }
+         show_calendar(date)//显示日历
      })
 
      myChart.on('click', function (params) {
-         now_date =  params.value[0]
-         show_news(src)
+         todayDate =  params.value[0]
+         show_news(src)//显示日历控件点击日期显示相应日期的新闻
      });
 
     function show_news(id){
@@ -70,7 +86,7 @@
                 // data发送urlencoded格式就行，数据没那么深，没必要发json格式
                 data:{
                     src_id:src,
-                    news_date:now_date,
+                    news_date:todayDate,
                     csrfmiddlewaretoken:$("[name='csrfmiddlewaretoken']").val()
                 },
                 success:function(response) {
@@ -84,7 +100,11 @@
                        '</div>'
                        $("#news-box").append(htmlStr)
                    }
-
+                   $("#countplate").html(" ")
+                   htmlStr2='<span class="number">共'+
+                           news.length+
+                           ' 条新闻</span>'
+                   $("#countplate").append(htmlStr2)
 
 
                 }

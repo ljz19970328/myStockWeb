@@ -314,7 +314,7 @@ option = {
     calendar: [{
         left: 'center',
         top: 'middle',
-        cellSize: [40, 40],
+        cellSize: [35, 35],
         yearLabel: {show: false},
         orient: 'vertical',
         dayLabel: {
@@ -323,7 +323,6 @@ option = {
         },
         range: '2019-02'
     }],
-
     series: [{
         type: 'scatter',
         coordinateSystem: 'calendar',

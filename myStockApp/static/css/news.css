@@ -1,5 +1,44 @@
+.calendar{
+    position: absolute;
+    top:200px;
+    left:20px;
+    height:240px;
+    width: 320px;
+     border: 1px solid #0bc5de;
+    background: #ffffff;
+}
+.news-logo{
+    position: absolute;
+    left:40px;
+    top: 20px;
+    background: url("../image/newslogo.jpg");
+    width: 300px;
+    height: 120px;
+    background-size: 100% 100%;
+}
+.countplate{
+    background: url("../image/countplate.png");
+    width:330px;
+    height: 150px;
+    top:550px;
+    left: 10px;
+    position: absolute;
+    background-size: 100% 100%;
+
+}
+.number{
+    position: absolute;
+    left: 35px;
+    top: 80px;
+    font-size:24px;
+    height:40px;
+    width: 160px;
+    color: #a41515;
+}
 .select-source ul{
-    margin-left: 150px;
+    position: absolute;
+    top:20px;
+    left: 350px;
     list-style:none;
     padding: 0px;
     width: auto;
@@ -13,46 +52,35 @@
 .select-source ul li a{
     width: 150px;
     display: inline-block;
-    text-align: center
+    text-align: center;
+    cursor:pointer;
 }
-.logo1{
+.select-source ul li a:hover{
+    text-decoration:underline;
+}
+.select-source ul li div{
     width: 150px;
     height: 60px;
-    background: url("../image/sina.png");
-    background-size: 100% 100%;
 }
-.logo2{
-      width: 150px;
-    height: 60px;
-    background: url("../image/wallstreetcn.png");
-     background-size: 100% 100%;
+.select-source ul li div img{
+    width: 120px;
+   cursor:pointer;
 }
-.logo3{
-     width: 150px;
-    height: 60px;
-    background: url("../image/10jqka.png");
-     background-size: 100% 100%;
-}
-.logo4{
-     width: 150px;
-    height: 60px;
-    background: url("../image/eastmoney.png");
-     background-size: 100% 100%;
-}
-.logo5{
-      width: 150px;
-    height: 60px;
-    background: url("../image/yuncaijing.png");
-     background-size: 100% 100%;
-}
-
 .news-box{
+    position: absolute;
+    top:130px;
+    width: 800px;
+    left:350px;
+    right:20px;
     height: 800px;
     overflow-y: scroll;
-    float: left;
+    background: #ffffff;
+    border: 1px solid #0bc5de;
 }
 .news{
+    margin-left: 20px;
+    margin-right: 20px;
     margin-top: 10px;
-    background: #ffffff;
+    background: #cfdbe6;
     border-bottom: 2px solid #a41515;
 }
