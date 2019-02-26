@@ -31,7 +31,7 @@ def show_news(request):
 def get_news(request):
     if request.is_ajax():
         src = request.POST.get('src_id')
-        date = request.POST.get('news_date')
+        date = request.POST.get('news_date')  # 获得的数据格式是2019-2-9
         t = date.split('-')
         if int(t[1]) < 10:
             t[1] = '0'+str(int(t[1]))
@@ -60,5 +60,6 @@ def get_calendar():
         else:
             t_list.append(ctime)
     values = list(reversed(t_list))
+    # 返回的数据格式使2019-01-01
     return values
 

@@ -33,42 +33,38 @@ def show_searchResult(request):
     return render(request, 'searchResults.html',{'searchResults': stock_data})
 
 
-# stock涨跌序列排序
-def stock_fluctuation():
-    trade_date = time.strftime('%Y%m%d', time.localtime(time.time()))
-    df = pro.daily(trade_date='20190215')
-    data = df[['ts_code', 'pre_close', 'open', 'close', 'pct_chg']]
-    data = data.to_json(orient='index')
-    temp_data = json.loads(data)
-    stockList = []
-    for i in temp_data:
-        # dict转obj
-        class DicToObj:
-            def __init__(self, **entries):
-                self.__dict__.update(entries)
-
-        r = DicToObj(**temp_data[i])
-        stockList.append(r)
-
-    # ！！！！快排算法！！！！
-    def part(List, begin, end):
-        k = List[end].pct_chg
-        i = begin - 1
-        for j in range(begin, end):
-            if List[j].pct_chg <= k:
-                i += 1
-                List[j], List[i] = List[i], List[j]
-        List[end], List[i + 1] = List[i + 1], List[end]
-        return i + 1
-
-    def quickSort(List, left, right):
-        if left < right:
-            mid = part(List, left, right)
-            quickSort(List, left, mid - 1)
-            quickSort(List, mid + 1, right)
-
-    quickSort(stockList, 0, len(stockList) - 1)
-    # ！！！！快排算法！！！！
+def get_trade_date(latest_time):
+    """
+    交易日为周一至周五，数据更新时间不同，所以要进行处理，保证此时的时间参数是可以获得tushare接口的数据
+    :param latest_time:
+    :return:
+    """
+    stamp = time.time()
+    # 获取当前时间戳
+    date = time.localtime(stamp)
+    # 利用localtime()转换为时间数组
+    hour = int(time.strftime('%H', date))
+    day = (time.strftime('%a', date))
+    if day != 'Sat' or day != 'Sun' or day != 'Mon':  # 周2，3，4，5
+        if hour > latest_time:
+            # 时间戳为当天
+            trade_date = time.strftime('%Y%m%d', date)  # 没有跟新的话时间戳减一天
+        elif hour <= latest_time:
+            # 时间戳为前一天
+            trade_date = time.strftime('%Y%m%d', time.localtime(stamp - 86400))  # 没有跟新的话时间戳减一天
+    if day == 'Sat':  # 周6
+        trade_date = time.strftime('%Y%m%d', time.localtime(stamp - 86400))  # 周六无数据，则取周五，时间戳减一天
+    if day == 'Sun':  # 周7
+        trade_date = time.strftime('%Y%m%d', time.localtime(stamp - 86400 * 2))  # 周日无数据，则取周五，时间戳减二天
+    if day == 'Mon':  # 周1
+        if hour > latest_time:
+            # 时间戳为当天
+            trade_date = time.strftime('%Y%m%d', date)  # 没有跟新的话时间戳减一天
+        elif hour <= latest_time:
+            # 时间戳为上周五
+            trade_date = time.strftime('%Y%m%d', time.localtime(stamp - 86400 * 3))  # 周一没有跟新的话时间戳减三天
+    # 返回的数据格式为20190225
+    return trade_date
 
 
 def query_stockDetails(request):
@@ -82,28 +78,8 @@ def query_stockDetails(request):
 
 # 获得股票基本面数据 交易日每日15点～17点之间更新
 def del_daily_basic(ts_code):
-    stamp = time.time()  # 获取当前时间戳
-    date = time.localtime(stamp)  # 利用localtime()转换为时间数组
-    hour = int(time.strftime('%H', date))
-    day = (time.strftime('%a', date))
-    if day != 'Sat' or day != 'Sun' or day != 'Mon':
-        if hour > 15:
-            # 时间戳为当天
-            trade_date = time.strftime('%Y%m%d', date)  # 没有跟新的话时间戳减一天
-        elif hour <= 15:
-            # 时间戳为前一天
-            trade_date = time.strftime('%Y%m%d', time.localtime(stamp - 86400))  # 没有跟新的话时间戳减一天
-    if day == 'Sat':
-        trade_date = time.strftime('%Y%m%d', time.localtime(stamp - 86400))  # 周六无数据，则取周五，时间戳减一天
-    if day == 'Sun':
-        trade_date = time.strftime('%Y%m%d', time.localtime(stamp - 86400*2))  # 周日无数据，则取周五，时间戳减二天
-    if day == 'Mon':
-        if hour > 15:
-            # 时间戳为当天
-            trade_date = time.strftime('%Y%m%d', date)  # 没有跟新的话时间戳减一天
-        elif hour <= 15:
-            # 时间戳为上周五
-            trade_date = time.strftime('%Y%m%d', time.localtime(stamp - 86400*3))  # 周一没有跟新的话时间戳减三天
+    trade_date = get_trade_date(17)
+    # 基本面数据最晚更新时间17点
     df = pro.daily_basic(ts_code=ts_code, trade_date=trade_date)
     data = df.to_json(orient='index')  # dataframe转json
     temp_data = json.loads(data)  # json转dict
@@ -216,7 +192,48 @@ def show_stockDetails(request):
     return render(request, 'stockDetails.html', locals())
 
 
+# stock涨跌序列排序
+def stock_fluctuation():
+    trade_date = get_trade_date(16)
+    # 日线最晚更新时间16点
+    df = pro.daily(trade_date=trade_date)
+    data = df[['ts_code', 'pre_close', 'open', 'high','close','change','pct_chg','amount']]
+    data = data.to_json(orient='index')
+    temp_data = json.loads(data)
+    stockList = []
+    for i in temp_data:
+        # dict转obj
+        class DicToObj:
+            def __init__(self, **entries):
+                self.__dict__.update(entries)
+        r = DicToObj(**temp_data[i])
+        stockList.append(r)
+    # ！！！！快排算法！！！！
+    def part(List, begin, end):
+        k = List[end].pct_chg
+        i = begin - 1
+        for j in range(begin, end):
+            if List[j].pct_chg <= k:
+                i += 1
+                List[j], List[i] = List[i], List[j]
+        List[end], List[i + 1] = List[i + 1], List[end]
+        return i + 1
+
+    def quickSort(List, left, right):
+        if left < right:
+            mid = part(List, left, right)
+            quickSort(List, left, mid - 1)
+            quickSort(List, mid + 1, right)
+
+    quickSort(stockList, 0, len(stockList) - 1)
+    # ！！！！快排算法！！！！
+    return stockList
+
+
 def main(request):
-    return render(request, "main.html")
+    stockList= stock_fluctuation()
+    downStockList = stockList[0:1000]
+    upStockList = list(reversed(stockList))[0:1000]
+    return render(request, "main.html", {"downStockList": downStockList,"upStockList":upStockList})
 
 
