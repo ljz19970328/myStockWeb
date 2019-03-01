@@ -1,11 +1,10 @@
 import time
+import heapq
 import numpy as np
-from django.http import JsonResponse
+from django.http import JsonResponse, HttpResponse
 from django.shortcuts import render, redirect, render_to_response
 import json
-
-from pandas import DataFrame
-
+import pandas as pd
 from myStockApp.models import Stock
 from myStockApp.models import StockDetails
 import tushare as ts
@@ -193,47 +192,38 @@ def show_stockDetails(request):
 
 
 # stock涨跌序列排序
-def stock_fluctuation():
+def stock_fluctuation(request):
+    how = request.POST.get('how')
+    sort_name = request.POST.get('type')
+    print(sort_name)
     trade_date = get_trade_date(16)
     # 日线最晚更新时间16点
     df = pro.daily(trade_date=trade_date)
-    data = df[['ts_code', 'pre_close', 'open', 'high','close','change','pct_chg','amount']]
-    data = data.to_json(orient='index')
-    temp_data = json.loads(data)
-    stockList = []
-    for i in temp_data:
-        # dict转obj
-        class DicToObj:
-            def __init__(self, **entries):
-                self.__dict__.update(entries)
-        r = DicToObj(**temp_data[i])
-        stockList.append(r)
-    # ！！！！快排算法！！！！
-    def part(List, begin, end):
-        k = List[end].pct_chg
-        i = begin - 1
-        for j in range(begin, end):
-            if List[j].pct_chg <= k:
-                i += 1
-                List[j], List[i] = List[i], List[j]
-        List[end], List[i + 1] = List[i + 1], List[end]
-        return i + 1
-
-    def quickSort(List, left, right):
-        if left < right:
-            mid = part(List, left, right)
-            quickSort(List, left, mid - 1)
-            quickSort(List, mid + 1, right)
-
-    quickSort(stockList, 0, len(stockList) - 1)
-    # ！！！！快排算法！！！！
-    return stockList
+    stockData = df[['ts_code', 'pre_close', 'open', 'high','close','change','pct_chg','amount']]
+    try:
+        stock_name_list = Stock.objects.all().values_list('ts_code','name','symbol')
+        # 数据库取出股票名称,股票代码 ,为queryset类型数据
+        nameFrame = pd.DataFrame(list(stock_name_list))
+        # queryset类型数据转成DataFrame
+        nameFrame.columns = ['ts_code', 'name', 'symbol']
+        # 重新添加列明
+        result = pd.merge(stockData, nameFrame,on='ts_code')
+        # 通过列名ts_code把两个frame拼接
+    except:
+        print("数据库查询失败")
+    json_stockList = result.to_json(orient='records', force_ascii=False)  # dataframe转json,
+    json_stockList = json.loads(json_stockList)
+    if(how == '1'):
+        high_1000 = heapq.nlargest(100, json_stockList, key=lambda s: s[sort_name])  # 选出前100大的元素
+        high_1000 = json.dumps(high_1000, ensure_ascii=False)
+        stockList = high_1000
+    if(how == '0'):
+        low_1000 = heapq.nsmallest(100, json_stockList, key=lambda s: s[sort_name])  # 选出前100小的元素
+        low_1000 = json.dumps(low_1000, ensure_ascii=False)
+        stockList = low_1000
+    print(stockList)
+    return HttpResponse(stockList)
 
 
 def main(request):
-    stockList= stock_fluctuation()
-    downStockList = stockList[0:1000]
-    upStockList = list(reversed(stockList))[0:1000]
-    return render(request, "main.html", {"downStockList": downStockList,"upStockList":upStockList})
-
-
+    return render(request, "main.html")

@@ -18,60 +18,52 @@
 新浪新闻
 </div>
 <div class="stock-sequence">
-<div style="float: left">
- <table id="sequence-box">
-    <tr>
+<div style="float: left"></div>
+ <table class="sequence-table" id="sequence-table">
+    <tr class="index">
          {% csrf_token %}
             <td>序号</td>
-            <td >TS代码</td>
+            <td >代码</td>
+            <td >名称</td>
             <td>昨收价 <div>
-                <img src="{% static "/image/up.png" %}" width="15px">
-                <img src="{% static "/image/down.png" %}" width="15px">
-                </div></td>
-            <td>今开价<div>
-                <img src="{% static "/image/up.png" %}" width="15px">
-                <img src="{% static "/image/down.png" %}" width="15px">
-                </div></td>
-            <td>最高价<div>
-                <img src="{% static "/image/up.png" %}" width="15px">
-                <img src="{% static "/image/down.png" %}" width="15px">
-                </div></td>
-            <td>今收价<div>
-                <img src="{% static "/image/up.png" %}" width="15px">
-                <img src="{% static "/image/down.png" %}" width="15px">
-                </div></td>
-            <td>涨幅(%)
-                <div>
-                <img src="{% static "/image/up.png" %}" width="15px">
-                <img src="{% static "/image/down.png" %}" width="15px">
+                <img src="{% static "/image/up.png" %}"  onclick="sort_100('1','pre_close')">
+                <img src="{% static "/image/down.png" %}"  onclick="sort_100('0','pre_close')">
                 </div>
             </td>
-            <td>涨跌<div>
-                <img src="{% static "/image/up.png" %}" width="15px">
-                <img src="{% static "/image/down.png" %}" width="15px">
-                </div> </td>
+            <td>今开价<div>
+                <img src="{% static "/image/up.png" %}"  onclick="sort_100('1','open')">
+                <img src="{% static "/image/down.png" %}"  onclick="sort_100('0','open')">
+                </div>
+            </td>
+            <td>今最高价<div>
+                <img src="{% static "/image/up.png" %}"  onclick="sort_100('1','high')">
+                <img src="{% static "/image/down.png" %}"  onclick="sort_100('0','high')">
+                </div>
+            </td>
+            <td>今收价<div>
+                <img src="{% static "/image/up.png" %}"  onclick="sort_100('1','close')">
+                <img src="{% static "/image/down.png" %}"  onclick="sort_100('0','close')">
+                </div>
+            </td>
+            <td>涨幅(%)
+                <div>
+                <img src="{% static "/image/up.png" %}"  onclick="sort_100('1','pct_chg')">
+                <img src="{% static "/image/down.png" %}"  onclick="sort_100('0','pct_chg')">
+                </div>
+            </td>
+            <td>涨跌额<div>
+                <img src="{% static "/image/up.png" %}"  onclick="sort_100('1','change')">
+                <img src="{% static "/image/down.png" %}"  onclick="sort_100('0','change')">
+                </div>
+            </td>
             <td>成交额(千元)<div>
-                <img src="{% static "/image/up.png" %}" width="15px">
-                <img src="{% static "/image/down.png" %}" width="15px">
-                </div></td>
-
+                <img src="{% static "/image/up.png" %}"  onclick="sort_100('1','amount')">
+                <img src="{% static "/image/down.png" %}" onclick="sort_100('0','amount')">
+                </div>
+            </td>
             <td>操作</td>
         </tr>
     <tbody id="paging_table">
-   {% for stock in upStockList %}
-        <tr>
-            <td>{{ forloop.counter }}</td>
-            <td id="ts_code">{{ stock.ts_code}}</td>
-            <td>{{ stock.pre_close}}</td>
-            <td>{{ stock.open}}</td>
-            <td>{{ stock.high}}</td>
-            <td>{{ stock.close}}</td>
-            <td>{{ stock.pct_chg}}</td>
-            <td>{{ stock.change}}</td>
-            <td>{{ stock.amount}}</td>
-            <td><button  class="show-details-bt" type="button" id="show_detail" onclick="to_stockDetails(this)">查看更多详情</button></td>
-        </tr>
-    {% endfor %}
     </tbody>
     </table>
     <div class="paging">
@@ -83,20 +75,22 @@
          <span id="spanLast">最后一页</span>
      </div>
 </div>
-</div>
 </body>
 <script>
-var theTable = document.getElementById("paging_table");
-var totalPage = document.getElementById("spanTotalPage");
-var pageNum = document.getElementById("spanPageNum");
-var spanPre = document.getElementById("spanPre");
-var spanNext = document.getElementById("spanNext");
-var spanFirst = document.getElementById("spanFirst");
-var spanLast = document.getElementById("spanLast");
-var numberRowsInTable = theTable.rows.length;
-var pageSize = 10;
-var page = 1;
-paging()
+    var theTable = document.getElementById("paging_table");
+    var totalPage = document.getElementById("spanTotalPage");
+    var pageNum = document.getElementById("spanPageNum");
+    var spanPre = document.getElementById("spanPre");
+    var spanNext = document.getElementById("spanNext");
+    var spanFirst = document.getElementById("spanFirst");
+    var spanLast = document.getElementById("spanLast");
+    var numberRowsInTable = 100; //显示的数量
+    var pageSize = 8;
+    var page = 1;
+$(function () {
+    sort_100('1','pct_chg')  //默认涨跌排序pct_chg为从大到小排列
+})
+
  function to_stockDetails(obj){
      var post_data={
          "ts_code":$(obj).parents("tr").find("#ts_code").text(),
@@ -112,7 +106,46 @@ paging()
             });
  }
 
- function sort(){
+ function sort_100(variable1,variable2){
+     var post_data={
+         "how":variable1,//上升或者下降
+         "type":variable2,//数据种类
+         "csrfmiddlewaretoken":$("[name='csrfmiddlewaretoken']").val()
+     }
+      $.ajax({
+                url:  '/get_sort/',
+                type: "POST",
+                data: post_data,
+                success: function (data) {
+                    var stocks=JSON.parse(data); //可以将json字符串转换成json对象
+                    $("#paging_table").html('')
+                    if (variable1=='0'){
+                        var color1="#00FA9A";
+                        var color2="#90EE90";
+                    }
+                     if (variable1=='1'){
+                        var color1="#ef232a";
+                        var color2="#ffa400";
+                    }
+                   for( var i in stocks ) {
+                      htmlStr= '<tr>'
+                          +' <td>'+i+ '</td>'
+                          +' <td class="point" id="btn" onclick="to_stockDetails(this)" style="color:#4169E1" > '+stocks[i].symbol+'<span id="ts_code" hidden>'+stocks[i].ts_code+'</span></td>'
+                          +' <td class="point" id="btn" onclick="to_stockDetails(this)"style="color:#4169E1">'+ stocks[i].name+'</td>'
+                          +' <td style="color:'+color1+'">'+ stocks[i].pre_close+'</td> '
+                          +' <td style="color:'+color1+'">'+ stocks[i].open+'</td> '
+                          +' <td style="color:'+color2+'">'+ stocks[i].high+'</td>'
+                          +' <td style="color:'+color2+'">'+ stocks[i].close+'</td>'
+                          +' <td style="color:'+color1+'">'+ stocks[i].pct_chg+'</td>'
+                          +' <td style="color:'+color1+'">'+ stocks[i].change+'</td>'
+                          +' <td >'+ stocks[i].amount+'</td>'
+                          +'  <td><button  class="show-details-bt" type="button" id="show_detail" onclick="to_stockDetails(this)">查看更多详情</button></td>'
+                          +'</tr>'
+                       $("#paging_table").append(htmlStr)
+                   }
+                   paging()
+                }
+      });
 
  }
 </script>
