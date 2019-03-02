@@ -49,6 +49,12 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
+#缓存 redis memcache
+SESSION_ENGINE = 'django.contrib.sessions.backends.cached_db'        # 引擎
+
+#浏览器cook（相当于没有用session，又把敏感信息保存到客户端了）
+SESSION_ENGINE = 'django.contrib.sessions.backends.signed_cookies'   # 引擎
+SESSION_SERIALIZER = 'django.contrib.sessions.serializers.PickleSerializer'
 
 ROOT_URLCONF = 'myStockWeb.urls'
 

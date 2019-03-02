@@ -1,0 +1,35 @@
+.userCs{
+	width: 30%;
+	height: 20px;
+	margin-top: 40px;
+
+}
+.divCs{
+	margin-left: 40%;
+}
+.srcDiivCs{
+	margin-left: 20%;
+	margin-top: 5%;
+	/*float: left;*/
+}
+.SPANuSER{
+	margin-left: 20%;
+	font-size: 20PX;
+	color:#d3d3d3;
+}
+.otherCs{
+	width: 30%;
+	height: 20px;
+	margin-top: 20px;
+}
+.formCencs{
+	width:80%;
+	margin: 0 auto;
+}
+.btnCs{
+	margin-top: 20px;
+	margin-left: 13%;
+}
+body,html{
+			width:100%;
+		}

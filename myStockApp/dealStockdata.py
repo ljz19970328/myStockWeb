@@ -5,7 +5,7 @@ from django.http import JsonResponse, HttpResponse
 from django.shortcuts import render, redirect, render_to_response
 import json
 import pandas as pd
-from myStockApp.models import Stock
+from myStockApp.models import Stock, User, UserStockDetails
 from myStockApp.models import StockDetails
 import tushare as ts
 from django.db.models import Q
@@ -252,6 +252,31 @@ def get_index_line_chart(request):
         "values": values,
     }
     return JsonResponse(data)
+
+
+def show_collection_stockDetails(request):  # 我的收藏页面数据填充
+    LoginName1=request.session.get("islogin")
+    response = {"msg": ""}
+    if(User.objects.filter(name=LoginName1)):
+      try:
+          global stock_data1
+          stock_data1 = UserStockDetails.objects.filter(Q(UserCollectionDetails_username=LoginName1))#获取用户收藏股票代码
+          menu_list=[]
+          for i in stock_data1:
+              menu=Stock.objects.get(ts_code=i.UserCollectionDetails_name)#查询收藏股票的具体信息
+              menu_list.append(menu)
+          global  col_data
+          col_data=menu_list
+          response['msg'] = 'ok'
+          return render(request, 'myCollectionStock.html', {'searchResults': col_data})#渲染数据进入我的收藏界面
+      except:
+        response['msg'] = 'flase'
+        print("查询失败")
+      return JsonResponse(response)
+    else:
+        response['msg'] = 'noLog'
+        return JsonResponse(response)
+       # return render(request, 'login.html')
 
 
 

@@ -14,7 +14,8 @@
 <div class="company-profile">
 <div class="profile-title">公司简介：</div>
 {% for item  in stockDetails%}
-    <p>股票代码:{{ item.ts_code}}</p>
+    <p><button  id="ts_code_id" onclick="collection_stock(this)">收藏股票</button></p>
+    <p id="ts_code_ID">股票代码:{{ item.ts_code}}</p>
     <p>所属地域：{{ item.province}}省，{{ item.city}}</p>
     <p>法人代表：{{ item.chairman}}</p>
     <p>总经理：{{ item.manager}}</p>
@@ -98,5 +99,38 @@
             show_k_line(data2,'月k线')
     });
     })
+
+       function collection_stock(obj) {
+        var ts_code_stock= $(obj).parents("div").find("#ts_code_ID").text()
+
+        var ts_code_collection=ts_code_stock.substring(ts_code_stock.lastIndexOf(":")+1);
+
+            $.ajax({
+                url:"/collection_stock/",
+                type:"post",
+            // data发送urlencoded格式就行，数据没那么深，没必要发json格式
+                data:{
+                    collection_info:ts_code_collection,
+                    csrfmiddlewaretoken:$("[name='csrfmiddlewaretoken']").val()
+                },
+                success:function(response) {
+                     if(response.err_msg=="false"){
+                    // 收藏失败
+                    alert('该股票已收藏,谢谢')
+                    $("#error").html(response.err_msg)
+                }
+                else if(response.err_msg=="true"){
+                    // 收藏成功
+                    alert('收藏成功')
+                }
+                else if(response.err_msg=="noLog")
+                     {
+                         alert('未登录，请登录')
+                       location.href="/login/"
+                     }
+                }
+            })
+        }
+
     </script>
 </html>

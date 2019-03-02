@@ -348,7 +348,6 @@ option = {
 
 
 function show_stock_mark(data,type){
-    alert(type)
     var myChart = echarts.init(document.getElementById('lineChart-box'));
 option = {
     tooltip: {

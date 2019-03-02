@@ -1,0 +1,218 @@
+{% load staticfiles %}
+<html>
+<head>
+    <link href={% static '/css/searchResults.css'%} rel="stylesheet" type="text/css"/>
+    <script src={% static '/js/jquery-3.3.1.min.js' %} type="text/javascript"></script>
+        <meta charset="utf-8">
+     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>搜索结果</title>
+</head>
+
+<body>
+    <div class="result-box">
+    <table class="result-table"id="result-box">
+    <tr>
+         {% csrf_token %}
+            <td>序号</td>
+            <td >TS代码</td>
+            <td>股票代码</td>
+            <td>股票名称</td>
+            <td>所在地域</td>
+            <td>所属行业</td>
+            <td>上市日期</td>
+        <td><p>市场类型 </p><p>（主板/中小板/创业板）</p></td>
+            <td>操作</td>
+        </tr>
+    <tbody id="table2">
+    {% for item  in searchResults%}
+        <tr>
+            <td>{{ forloop.counter }}</td>
+            <td id="ts_code">{{ item.ts_code}}</td>
+            <td>{{ item.symbol}}</td>
+            <td>{{ item.name}}</td>
+            <td>{{ item.area}}</td>
+            <td>{{ item.industry}}</td>
+            <td>{{ item.list_date}}</td>
+            <td>{{ item.market}}</td>
+            <td><button  class="show-details-bt" type="button" id="show_detail" onclick="to_stockDetails(this)">查看更多详情</button></td>
+           <td><button  class="del-details-bt" type="button" id="del_detail" onclick="del_stockDetails(this)">删除</button></td>
+        </tr>
+    {% endfor %}
+    </tbody>
+    </table>
+    <div class="paging">
+        <span id="spanFirst">第一页</span>
+        <span id="spanPre">上一页</span>
+        <span id="spanNext">下一页</span>
+         <span id="spanLast">最后一页</span>
+         第<span id="spanPageNum"></span>页/共
+        <span id="spanTotalPage"></span>页
+     </div>
+    </div>
+</body>
+<script>
+var theTable = document.getElementById("table2");
+var totalPage = document.getElementById("spanTotalPage");
+var pageNum = document.getElementById("spanPageNum");
+var spanPre = document.getElementById("spanPre");
+var spanNext = document.getElementById("spanNext");
+var spanFirst = document.getElementById("spanFirst");
+var spanLast = document.getElementById("spanLast");
+var numberRowsInTable = theTable.rows.length;
+var pageSize = 20;
+var page = 1;
+ //下一页
+ function next() {
+    hideTable();
+    currentRow = pageSize * page;
+    maxRow = currentRow + pageSize;
+     if ( maxRow > numberRowsInTable )
+     maxRow = numberRowsInTable;
+     for ( var i = currentRow; i< maxRow; i++ ) {
+        theTable.rows[i].style.display = '';
+     }
+        page++;
+    if ( maxRow == numberRowsInTable ){
+        nextText();
+        lastText();
+     }
+     showPage();
+     preLink();
+     firstLink();
+ }
+
+ //上一页
+ function pre() {
+    hideTable();
+     page--;
+     currentRow = pageSize * page;
+     maxRow = currentRow - pageSize;
+     if ( currentRow > numberRowsInTable )
+     currentRow = numberRowsInTable;
+     for ( var i = maxRow; i< currentRow; i++ ) {
+         theTable.rows[i].style.display = '';
+     }
+     if ( maxRow == 0 ) {
+        preText();
+        firstText();
+     }
+     showPage();
+    nextLink();
+     lastLink();
+ }
+ //第一页
+ function first() {
+     hideTable();
+     page = 1;
+    for ( var i = 0; i<pageSize; i++ ) {
+         theTable.rows[i].style.display = '';
+     }
+     showPage();
+
+    preText();
+     nextLink();
+     lastLink();
+ }
+
+ //最后一页
+ function last() {
+     hideTable();
+     page = pageCount();
+     currentRow = pageSize * (page - 1);
+     for ( var i = currentRow; i<numberRowsInTable; i++ ) {
+         theTable.rows[i].style.display = '';
+     }
+    showPage();
+
+     preLink();
+     nextText();
+    firstLink();
+ }
+
+ function hideTable() {
+     for ( var i = 0; i<numberRowsInTable; i++ ) {
+     theTable.rows[i].style.display = 'none';
+    }
+ }
+
+ function showPage() {
+    pageNum.innerHTML = page;
+ }
+
+//总共页数
+ function pageCount() {
+     var count = 0;
+    if ( numberRowsInTable%pageSize != 0 ) count = 1;
+     return parseInt(numberRowsInTable/pageSize) + count;
+ }
+
+ //显示链接
+ function preLink() { spanPre.innerHTML = "<a href='javascript:pre();'>上一页</a>"; }
+ function preText() { spanPre.innerHTML = "上一页"; }
+
+ function nextLink() { spanNext.innerHTML = "<a href='javascript:next();'>下一页</a>"; }
+ function nextText() { spanNext.innerHTML = "下一页"; }
+
+ function firstLink() { spanFirst.innerHTML = "<a href='javascript:first();'>第一页</a>"; }
+ function firstText() { spanFirst.innerHTML = "第一页"; }
+
+ function lastLink() { spanLast.innerHTML = "<a href='javascript:last();'>最后一页</a>"; }
+ function lastText() { spanLast.innerHTML = "最后一页"; }
+
+//隐藏表格
+ function hide() {
+     for ( var i = pageSize; i<numberRowsInTable; i++ ) {
+         theTable.rows[i].style.display = 'none';
+    }
+    totalPage.innerHTML = pageCount();
+    pageNum.innerHTML = '1';
+    nextLink();
+    lastLink();
+ }
+ hide();
+
+ function to_stockDetails(obj){
+     var post_data={
+         "ts_code":$(obj).parents("tr").find("#ts_code").text(),
+         "csrfmiddlewaretoken":$("[name='csrfmiddlewaretoken']").val()
+     }
+     $.ajax({
+                url:  '/query_stockDetails/',
+                type: "POST",
+                data: post_data,
+                success: function (data) {
+                    window.location.href="/show_stockDetails/"
+                }
+            });
+ }
+ function del_stockDetails(obj){
+        var ts_code_stock= $(obj).parents("tr").find("#ts_code").text()
+        var ts_code_collection=ts_code_stock.substring(ts_code_stock.lastIndexOf(":")+1);
+     $.ajax({
+                url:  '/del_stockDetails/',
+                type: "POST",
+                data:{
+                    del_collection_info:ts_code_collection,
+                    csrfmiddlewaretoken:$("[name='csrfmiddlewaretoken']").val()
+                },
+                success: function (response) {
+                     if(response.err_msg=="false"){
+                    // 收藏失败
+                    alert('删除失败')
+                    $("#error").html(response.err_msg)
+                }
+                else if(response.err_msg=="true"){
+                    // 收藏成功
+                    alert('删除成功')
+                 location.href="/collection_stockDetails/"
+                }
+                else if(response.err_msg=="noLog")
+                     {
+                         alert('没有登录')
+                         location.href="/login/"
+                     }
+                }
+            });
+ }
+</script>
+</html>

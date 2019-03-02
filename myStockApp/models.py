@@ -54,6 +54,15 @@ class StockDetails(models.Model):
     main_business = models.TextField(null=True)
     business_scope = models.TextField(null=True)
 
-
     def __str__(self):
         return self.name
+
+
+class UserStockDetails(models.Model):
+    #UserCollection_id = models.AutoField(primary_key=True)
+    UserCollectionDetails_username = models.CharField(max_length=32,null=False)
+    UserCollectionDetails_name = models.CharField(max_length=32,null=False)
+    c_time = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return (self.name)

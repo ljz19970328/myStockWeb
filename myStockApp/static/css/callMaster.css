@@ -1,0 +1,48 @@
+		body,html{
+			width:100%;
+		}
+		.formCs{
+			background:url(../image/callMasterBack.jpg)no-repeat;
+			background-size: 100%;
+		}
+		button:hover
+{ 
+background-color:gainsboro;
+}
+.formCencs{
+	width:70%;
+	margin: 0 auto;
+}
+ .inTitCs{
+ 	width: 70%;
+ 	height: 30px;
+ 	margin: 20px;
+ 	color:#FF0000;
+ }	
+  .inWriCs{
+ 	width: 70%;
+ 	display:inline-block;
+ 	height:500px;
+ 	margin: 20px;
+  font-size:1.4em;
+ border:1px solid #c8cccf;
+  color:#000000;
+outline:0;
+  text-decoration:none;
+ }		
+ .btnSentCs{
+ 	width:100px;
+ 	height: 30px;
+ 	margin-left: 30%;
+ }
+ .btnResCs{
+ 	width:100px;
+ 	height: 30px;
+ 	margin-left: 20px;
+ }
+ .spanCs{
+	 vertical-align: top;
+	 margin-top: 20px;
+	 display: inline-block;
+ }
+		
