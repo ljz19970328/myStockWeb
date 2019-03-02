@@ -321,7 +321,7 @@ option = {
             firstDay: 1,
             nameMap: 'cn'
         },
-        range: '2019-02'
+        range: '2019-03'
     }],
     series: [{
         type: 'scatter',
@@ -344,4 +344,72 @@ option = {
 ]
 };
  myChart.setOption(option);
+}
+
+
+function show_stock_mark(data,type){
+    alert(type)
+    var myChart = echarts.init(document.getElementById('lineChart-box'));
+option = {
+    tooltip: {
+        trigger: 'axis',
+        position: function (pt) {
+            return [pt[0], '10%'];
+        }
+    },
+    title: {
+        left: 'left',
+        text: type,
+    },
+    xAxis: {
+        type: 'category',
+        boundaryGap: false,
+        data: data.categoryData
+    },
+    yAxis: {
+        type: 'value',
+        boundaryGap: [0, '100%'],
+        splitLine: {
+            show: false
+        }
+    },
+    dataZoom: [
+        {
+            type: 'inside',
+            start: 99.5,
+            end: 100
+        },
+        {
+            show: true,
+            type: 'slider',
+            y: '90%',
+            start: 99.5,
+            end: 100
+        }
+    ],
+    series: [
+        {
+            name:'指数点数',
+            type:'line',
+            smooth:true,
+            symbol: 'none',
+            sampling: 'average',
+            itemStyle: {
+                color: "#FF4683"
+            },
+            areaStyle: {
+                color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
+                    offset: 0,
+                    color: "#FF9E44"
+                }, {
+                    offset: 1,
+                    color:"#FF4683"
+                }])
+            },
+            data: data.values
+        }
+    ]
+};
+  // 使用刚指定的配置项和数据显示图表
+    myChart.setOption(option);
 }

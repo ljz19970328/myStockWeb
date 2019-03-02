@@ -28,6 +28,18 @@ def show_news(request):
     return render(request, 'news.html', {'news': new_list, 'dateList': dateValues, 'todayDate': json.dumps(todayDate)})
 
 
+def main_show_sina_news(request):
+    dateValues = get_calendar()
+    todayDate = str(dateValues[-1])
+    endDate = time.strftime('%Y%m%d', time.localtime(time.time() + 86400))
+    startDate = time.strftime('%Y%m%d', time.localtime(time.time()))  # 只要跨度一天的新闻>80条
+    df = pro.news(src='sina', start_date=startDate, end_date=endDate)
+    json_newsList = df.to_json(orient='records', force_ascii=False)  # dataframe转json
+    newsList = json.loads(json_newsList)
+    newsList=json.dumps(newsList[:8])
+    return HttpResponse(newsList)
+
+
 def get_news(request):
     if request.is_ajax():
         src = request.POST.get('src_id')

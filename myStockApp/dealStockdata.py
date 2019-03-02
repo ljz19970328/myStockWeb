@@ -195,7 +195,7 @@ def show_stockDetails(request):
 def stock_fluctuation(request):
     how = request.POST.get('how')
     sort_name = request.POST.get('type')
-    print(sort_name)
+
     trade_date = get_trade_date(16)
     # 日线最晚更新时间16点
     df = pro.daily(trade_date=trade_date)
@@ -211,8 +211,8 @@ def stock_fluctuation(request):
         # 通过列名ts_code把两个frame拼接
     except:
         print("数据库查询失败")
-    json_stockList = result.to_json(orient='records', force_ascii=False)  # dataframe转json,
-    json_stockList = json.loads(json_stockList)
+    json_stockList = result.to_json(orient='records', force_ascii=False)  # dataframe转json
+    json_stockList = json.loads(json_stockList)  # json转list
     if(how == '1'):
         high_1000 = heapq.nlargest(100, json_stockList, key=lambda s: s[sort_name])  # 选出前100大的元素
         high_1000 = json.dumps(high_1000, ensure_ascii=False)
@@ -221,8 +221,39 @@ def stock_fluctuation(request):
         low_1000 = heapq.nsmallest(100, json_stockList, key=lambda s: s[sort_name])  # 选出前100小的元素
         low_1000 = json.dumps(low_1000, ensure_ascii=False)
         stockList = low_1000
-    print(stockList)
     return HttpResponse(stockList)
+
+
+def get_index(request):
+    trade_date = get_trade_date(16)  # 15时修盘，数据来源可能更新不及时，所以推后一时获取
+    df_SZ = pro.index_daily(ts_code='399001.SZ', trade_date=trade_date)
+    df_SZ['name'] = '深证成指'
+    df_SH = pro.index_daily(ts_code='000001.SH', trade_date=trade_date)
+    df_SH['name'] = '上证指数'
+    df = df_SZ.append(df_SH)
+    json_indexList = df.to_json(orient='records', force_ascii=False)  # dataframe转json
+    data = {
+        "json_indexList": json_indexList,
+    }
+    return JsonResponse(data)
+
+
+def get_index_line_chart(request):
+    ts_code = request.POST.get('ts_code')
+    data = pro.index_daily(ts_code=ts_code)
+    lineChart_time = data["trade_date"]
+    lineChart_data = data["high"]
+    timeList = lineChart_time.tolist()
+    dataList = lineChart_data.tolist()
+    categoryData = list(reversed(timeList))
+    values = list(reversed(dataList))
+    data = {
+        "categoryData": categoryData,
+        "values": values,
+    }
+    return JsonResponse(data)
+
+
 
 
 def main(request):

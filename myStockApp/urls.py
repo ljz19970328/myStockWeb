@@ -19,6 +19,9 @@ urlpatterns = [
     url(r'^query_stockDetails/', dealStockdata.query_stockDetails),
     url(r'^show_stockDetails/', dealStockdata.show_stockDetails),
     url(r'^get_sort/', dealStockdata.stock_fluctuation),
+    url(r'^get_index/', dealStockdata.get_index),
+    url(r'^get_index_line_chart/', dealStockdata.get_index_line_chart),
     url(r'^news/', dealNews.show_news),
     url(r'^get_news/', dealNews.get_news),
+    url(r'^get_sina_news/', dealNews.main_show_sina_news),
 ]

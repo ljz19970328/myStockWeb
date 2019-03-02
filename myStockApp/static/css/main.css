@@ -1,3 +1,14 @@
+.sc-logo{
+    position: absolute;
+    width: 25px;
+    top: 5px;
+    left: 25px;
+}
+.my-stock-title{
+    position: absolute;
+    top: 5px;
+    left:50px ;
+}
 .my-stock{
     position: absolute;
     top: 30px;
@@ -8,7 +19,18 @@
     background: #ffffff;
 }
 
-.large-market{
+.mark-logo{
+  position: absolute;
+    width: 25px;
+    top: 6px;
+    left: 250px;
+}
+.mark-title{
+    position: absolute;
+    top: 5px;
+    left:280px;
+}
+.large-mark{
     position: absolute;
     top: 30px;
     left: 245px;
@@ -18,6 +40,59 @@
     background: #ffffff;
 }
 
+.mark{
+   float: left;
+    margin-top:20px;
+    margin-left:80px;
+    width: 200px;
+    height:140px;
+    border-bottom: 1px solid #003300;
+}
+.mark:hover{
+    cursor: pointer;
+    background: #465c71;
+
+}
+.lineChart-box{
+    position: absolute;
+    width: 600px;
+    height: 300px;
+    top: 170px;
+    left: 25px;
+    background: #ebeff0;
+}
+.span1{
+    font-size:32px;
+}
+.span2{
+    font-size:16px;
+}
+.span3{
+    font-size:13px;
+}
+
+.mark-name{
+    float: left;
+    margin-left: 10px;
+    width:22px;
+    height:140px;
+    font-size: 18px;
+    line-height: 30px;
+    border-bottom: 0px;
+    background: #dde4ec;
+}
+
+.sina-logo{
+  position: absolute;
+    width: 25px;
+    top: 6px;
+    left: 925px;
+}
+.news-title{
+    position: absolute;
+    top: 5px;
+    left:955px;
+}
 .news{
     position: absolute;
     top: 30px;
@@ -27,10 +102,41 @@
     border: 1px solid #609ab6;
     background: #ffffff;
 }
+.news-content p{
 
+    font-size: 16px;
+    margin-top: 2px;
+    line-height: 20px;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 1;
+    overflow: hidden;
+}
+.news-content p:hover{
+    cursor: pointer;
+    text-decoration:underline;
+}
+.news-content{
+    text-overflow : clip;
+    float: left;
+    width: 250px;
+    height: auto;
+}
+
+.up-logo{
+  position: absolute;
+    width: 25px;
+    top: 543px;
+    left: 20px;
+}
+.sequence-title{
+    position: absolute;
+    top:540px;
+    left: 50px;
+}
 .stock-sequence{
     position: absolute;
-    top: 550px;
+    top: 565px;
     left: 20px;
     height:360px;
     width: 1150px;
