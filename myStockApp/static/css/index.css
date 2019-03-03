@@ -88,23 +88,25 @@ body {
     color:#03F
 }
 
-
+.search-box{
+    position: absolute;
+    top:30px ;
+    right:300px;
+    width:210px ;
+    height:30px ;
+}
 .search-input{
-    margin-top:30px ;
+    float: left;
     height:30px;
     width: 150px;
-    position: absolute;
     border: solid 1px #bbccdd;
     font-size: 16px;
-    left:900px;
 }
 .search-btn{
-    margin-top:30px ;
+    float: left;
     height:30px;
     width: 60px;
-    position: absolute;
     border: solid 1px #bbccdd;
-    left:1050px;
 }
 
 .content{

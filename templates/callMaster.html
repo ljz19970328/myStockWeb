@@ -19,7 +19,6 @@
         <script>
         $("#sent-btn").click(function () {
             alert('正在发送，请稍等！！')
-            alert('123'+$("#sentInfo-input").val())
             $.ajax({
                 url:"/callMaster/",
                 type:"post",
@@ -29,22 +28,16 @@
                     title_info:$("#title-input").val(),
                     csrfmiddlewaretoken:$("[name='csrfmiddlewaretoken']").val()
                 },
+                async : false,
                 success:function(response) {
-                       alert('你好')
-                    alert(response.err_msg)
                     if(response.err_msg=="success"){
                         alert('发送成功')
                         $("#msg").html(response.err_msg)
                     }
                     else if(response.err_msg=="NULLfAIL"){
                     // 发送失败
-                        alert('发送失败')
+                        alert('发送失败,请检查邮箱')
                         $("#msg").html(response.err_msg)
-                    }
-                    else if(response.err_msg=="noLog")
-                    {
-                        alert('未登录，请登录')
-                       location.href="/login/"
                     }
                 }
             })

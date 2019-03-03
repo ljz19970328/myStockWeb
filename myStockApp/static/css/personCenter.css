@@ -1,35 +1,118 @@
-.userCs{
-	width: 30%;
-	height: 20px;
-	margin-top: 40px;
+body{
+     padding:0;  /*去除内边距*/
+    border:0;   /*去除边框*/
+    margin:0;   /*去除外边距*/
+    background: url("../image/modifypaper.jpg");
+    background-size:100% 100% ;
+}
+.modify-box{
+	position: absolute;
+	height: 450px;
+	width: 350px;
+	top: 200px;
+	left:50%;
+	margin-left: -175px;
+	border: 1px solid #0bc5de;
+    box-shadow: 1px 1px 1px #79aec8;
+}
+
+.modifyWall{
+    position: absolute;
+    height: 450px;
+	width: 350px;
+	top: 200px;
+	left:50%;
+	margin-left: -175px;
+	background: url("../image/modify.jpg");
+    opacity: 0.85;
+    background-size:100% 100%;
+}
+.personLogo{
+    width: 60px;
+    position: absolute;
+    left: 50%;
+    margin-left: -30px;
+}
+.modify-box div{
+    margin-left:10px ;
+	float: left;
+	width: 330px;
+	height: 70px;
 
 }
-.divCs{
-	margin-left: 40%;
+
+.modify-box div input {
+    font-size: 20px;
+    float: right;
+	margin-right: 20px;
+	width: 220px;
+	height: 30px;
+    border: 1px solid #ccc;
+    padding: 7px 0px;
+    border-radius: 3px;
+    padding-left: 5px;
+    -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);
+    box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);
+    -webkit-transition: border-color ease-in-out .15s, -webkit-box-shadow ease-in-out .15s;
+    -o-transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+    transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s
 }
-.srcDiivCs{
-	margin-left: 20%;
-	margin-top: 5%;
-	/*float: left;*/
+.modify-box div input:focus {
+    border-color: #66afe9;
+    outline: 0;
+    -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075), 0 0 8px rgba(102, 175, 233, .6);
+    box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075), 0 0 8px rgba(102, 175, 233, .6)
 }
-.SPANuSER{
-	margin-left: 20%;
-	font-size: 20PX;
-	color:#d3d3d3;
+
+
+.modify-box div select{
+	font-size: 20px;
+	text-align: center;
+	text-align-last: center;
+	float: right;
+	margin-right: 140px;
+	width: 100px;
+	height: 30px;
 }
-.otherCs{
-	width: 30%;
-	height: 20px;
-	margin-top: 20px;
+
+.span1{
+	position: absolute;
+    top: 30px;
+	width: 250px;
+	left: 50%;
+	margin-left: -100px;
+	font-size: 50px;
+	color: #a41515;
 }
-.formCencs{
-	width:80%;
-	margin: 0 auto;
+
+.span2{
+    color: #a41515;
+	font-size: 20px;
+	float: left;
+	margin-left:20px;
+
 }
-.btnCs{
-	margin-top: 20px;
-	margin-left: 13%;
+
+.button-red {
+    font-size: 20px;
+    color:#465c71;
+    position: absolute;
+    width: 150px;
+    height: 40px;
+    margin-left: 90px;
+    background: #a41515;
+    background: -webkit-gradient(linear, left top, left bottom, from(#E84B6E), to(#a41515));
+    background: -moz-linear-gradient(-90deg, #E84B6E, #a41515);
+    filter: progid:DXImageTransform.Microsoft.Gradient(GradientType=0, StartColorStr='#E84B6E', EndColorStr='#D82741');
 }
-body,html{
-			width:100%;
-		}
+
+.button-red:hover {
+    background: #a41515;
+    background: -webkit-gradient(linear, left top, left bottom, from(#D82741), to(#E84B6E));
+    background: -moz-linear-gradient(-90deg, #D82741, #E84B6E);
+    filter: progid:DXImageTransform.Microsoft.Gradient(GradientType=0, StartColorStr='#D82741', EndColorStr='#E84B6E');
+}
+
+.button-red:active {
+    background: #D82741;
+}

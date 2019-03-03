@@ -1,78 +1,84 @@
 {% load staticfiles %}
 <html>
-    <head>
-        <link href={% static '/css/main.css'%} rel="stylesheet" type="text/css"/>
-        <script src={% static '/js/paging.js' %} type="text/javascript"></script>
-        <script src={% static '/js/dealEchart.js' %} type="text/javascript"></script>
-         <script src={% static '/js/echarts.min.js' %} type="text/javascript" ></script>
-        <script src={% static '/js/jquery-3.3.1.min.js' %} type="text/javascript"></script>
-        <meta charset="utf-8">
-     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<head>
+    <link href={% static '/css/main.css' %} rel="stylesheet" type="text/css"/>
+    <script src={% static '/js/paging.js' %} type="text/javascript"></script>
+    <script src={% static '/js/dealEchart.js' %} type="text/javascript"></script>
+    <script src={% static '/js/echarts.min.js' %} type="text/javascript"></script>
+    <script src={% static '/js/jquery-3.3.1.min.js' %} type="text/javascript"></script>
+    <meta charset="utf-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
 </head>
 <body>
-<img src="{% static "/image/scLogo.png"%}" class="sc-logo">
+<img src="{% static "/image/scLogo.png" %}" class="sc-logo">
 <span class="my-stock-title">我的收藏:</span>
-<div class="my-stock">
+<div class="my-stock" id="my-stock">
 </div>
-<img src="{% static "/image/markLogo.png"%}" class="mark-logo">
+<img src="{% static "/image/markLogo.png" %}" class="mark-logo">
 <span class="mark-title">沪深指数:</span>
 <div id='marks-box' class="large-mark">
     <div id='lineChart-box' class="lineChart-box"></div>
 </div>
-<img src="{% static "/image/sinaLogo.png"%}" class="sina-logo">
+<img src="{% static "/image/sinaLogo.png" %}" class="sina-logo">
 <span class="news-title">新浪新闻:</span>
-<div id='news-box'class="news">
+<div id='news-box' class="news">
 </div>
-<img src="{% static "/image/upLogo.png"%}" class="up-logo">
+<img src="{% static "/image/upLogo.png" %}" class="up-logo">
 <span class="sequence-title">涨跌幅排序:</span>
 <div class="stock-sequence">
-<div style="float: left"></div>
- <table class="sequence-table" id="sequence-table">
-    <tr class="index">
-         {% csrf_token %}
+    <div style="float: left"></div>
+    <table class="sequence-table" id="sequence-table">
+        <tr class="index">
+            {% csrf_token %}
             <td>序号</td>
-            <td >代码</td>
-            <td >名称</td>
-            <td>昨收价 <div>
-                <img src="{% static "/image/up.png" %}"  onclick="sort_100('1','pre_close')">
-                <img src="{% static "/image/down.png" %}"  onclick="sort_100('0','pre_close')">
+            <td>代码</td>
+            <td>名称</td>
+            <td>昨收价
+                <div>
+                    <img src="{% static "/image/up.png" %}" onclick="sort_100('1','pre_close')">
+                    <img src="{% static "/image/down.png" %}" onclick="sort_100('0','pre_close')">
                 </div>
             </td>
-            <td>今开价<div>
-                <img src="{% static "/image/up.png" %}"  onclick="sort_100('1','open')">
-                <img src="{% static "/image/down.png" %}"  onclick="sort_100('0','open')">
+            <td>今开价
+                <div>
+                    <img src="{% static "/image/up.png" %}" onclick="sort_100('1','open')">
+                    <img src="{% static "/image/down.png" %}" onclick="sort_100('0','open')">
                 </div>
             </td>
-            <td>今最高价<div>
-                <img src="{% static "/image/up.png" %}"  onclick="sort_100('1','high')">
-                <img src="{% static "/image/down.png" %}"  onclick="sort_100('0','high')">
+            <td>今最高价
+                <div>
+                    <img src="{% static "/image/up.png" %}" onclick="sort_100('1','high')">
+                    <img src="{% static "/image/down.png" %}" onclick="sort_100('0','high')">
                 </div>
             </td>
-            <td>今收价<div>
-                <img src="{% static "/image/up.png" %}"  onclick="sort_100('1','close')">
-                <img src="{% static "/image/down.png" %}"  onclick="sort_100('0','close')">
+            <td>今收价
+                <div>
+                    <img src="{% static "/image/up.png" %}" onclick="sort_100('1','close')">
+                    <img src="{% static "/image/down.png" %}" onclick="sort_100('0','close')">
                 </div>
             </td>
             <td>涨幅(%)
                 <div>
-                <img src="{% static "/image/up.png" %}"  onclick="sort_100('1','pct_chg')">
-                <img src="{% static "/image/down.png" %}"  onclick="sort_100('0','pct_chg')">
+                    <img src="{% static "/image/up.png" %}" onclick="sort_100('1','pct_chg')">
+                    <img src="{% static "/image/down.png" %}" onclick="sort_100('0','pct_chg')">
                 </div>
             </td>
-            <td>涨跌额<div>
-                <img src="{% static "/image/up.png" %}"  onclick="sort_100('1','change')">
-                <img src="{% static "/image/down.png" %}"  onclick="sort_100('0','change')">
+            <td>涨跌额
+                <div>
+                    <img src="{% static "/image/up.png" %}" onclick="sort_100('1','change')">
+                    <img src="{% static "/image/down.png" %}" onclick="sort_100('0','change')">
                 </div>
             </td>
-            <td>成交额(千元)<div>
-                <img src="{% static "/image/up.png" %}"  onclick="sort_100('1','amount')">
-                <img src="{% static "/image/down.png" %}" onclick="sort_100('0','amount')">
+            <td>成交额(千元)
+                <div>
+                    <img src="{% static "/image/up.png" %}" onclick="sort_100('1','amount')">
+                    <img src="{% static "/image/down.png" %}" onclick="sort_100('0','amount')">
                 </div>
             </td>
             <td>操作</td>
         </tr>
-    <tbody id="paging_table">
-    </tbody>
+        <tbody id="paging_table">
+        </tbody>
     </table>
     <div class="paging">
         <span id="spanFirst">第一页</span>
@@ -80,8 +86,8 @@
         第<span id="spanPageNum"></span>页/共
         <span id="spanTotalPage"></span>页
         <span id="spanNext">下一页</span>
-         <span id="spanLast">最后一页</span>
-     </div>
+        <span id="spanLast">最后一页</span>
+    </div>
 </div>
 </body>
 <script>
@@ -96,140 +102,182 @@
     var pageSize = 8;
     var page = 1;
     var lineChartData;
-$(function () {
-    get_index() //请求大盘数据
-    get_line_chart_data("399001.SZ","深证成指")//请求大盘点数的折线图
-    sort_100('1','pct_chg')  //默认涨跌排序pct_chg为从大到小排列
-    get_sina_news()
-})
- function get_sina_news(){
-    var post_data={
-         "csrfmiddlewaretoken":$("[name='csrfmiddlewaretoken']").val()
-     }
-     $.ajax({
-         url: '/get_sina_news/',
-         type: "POST",
-         data: post_data,
-         success: function (data) {
-             var news=JSON.parse(data); //可以将json字符串转换成json对象
-             for (var i in news){
-                 strHtml='<div id="news-content" class="news-content">'+
-                    '<span style="color:#609ab6">'+news[i].datetime+'</span>'
-                     + '<p onclick="show_news()">' +news[i].content+'</p>'+ '</div>'
-                $("#news-box").append(strHtml)
-             }
-         }
-     })
- }
-function show_news() {
 
-     window.location.href="/news/"
-}
+    $(function () {
+        show_myCollection();//请求收藏数据
+        get_index();//请求大盘数据
+        get_line_chart_data("399001.SZ", "深证成指");//请求大盘点数的折线图
+        sort_100('1', 'pct_chg'); //默认涨跌排序pct_chg为从大到小排列
+        get_sina_news()
+    })
 
- function to_stockDetails(obj){
-     var post_data={
-         "ts_code":$(obj).parents("tr").find("#ts_code").text(),
-         "csrfmiddlewaretoken":$("[name='csrfmiddlewaretoken']").val()
-     }
-     $.ajax({
-                url:  '/query_stockDetails/',
-                type: "POST",
-                data: post_data,
-                success: function (data) {
-                    window.location.href="/show_stockDetails/"
-                }
-            });
- }
- function get_index(){
-     var post_data={
-         "csrfmiddlewaretoken":$("[name='csrfmiddlewaretoken']").val()
-     }
-     $.ajax({
-                url:  '/get_index/',
-                type: "POST",
-                data: post_data,
-                success: function (data) {
-                    var marks=JSON.parse(data.json_indexList); //可以将json字符串转换成json对象
-                    for( var i in marks ) {
-                        if(marks[i].pct_chg<0){
-                            var color="#00FA9A"
-                        }else{
-                            var color="#dd2200"
-                        }
-                        strOnclick='get_line_chart_data("'+marks[i].ts_code+'","'+marks[i].name+'")'
-                        strHtml ='<div class="mark" onclick='+strOnclick+'>' +
-                            '<div class="mark-name" >'+marks[i].name+'</div>'+
-                            '<div style="float:left;margin-left:20px"><p><span style="color:'+color+'"class="span1">'+marks[i].high+'</sapn></p>' +
-                            '<p><span style="color:'+color+'" class="span2">'+marks[i].change+'</span>' +
-                            '<span style="color:'+color+'" class="span3">('+marks[i].pct_chg+'%)<span></p></div>' +
-                            '</div>'
-                         $("#marks-box").append(strHtml)
+    function show_myCollection() {
+        $.ajax({
+            url: "/show_myCollection/",
+            type: "post",
+            // data发送urlencoded格式就行，数据没那么深，没必要发json格式
+            data: {
+                stock_info: $("#search-input").val(),
+                csrfmiddlewaretoken: $("[name='csrfmiddlewaretoken']").val()
+            },
+            success: function (data) {
+
+                if (data.msg == 'noLogin') {
+                    htmlstr = '<div style="position: absolute;left: 20px;top: 200px;"><span>您未登录，请登录查看</span><br>' +
+                        '<a style="margin-left:60px" href ="/login/" target="_parent">登录</a></div>'
+                    $('#my-stock').append(htmlstr)
+                } else {
+                     var c_stock = JSON.parse(data); //可以将json字符串转换成json对象
+                    for (var i in c_stock) {
+                        htmlStr = '<div class="c-box"><span>' + i + '</span>' +
+                            '<span id="name" onclick="to_stockDetails(this,2)" class="span4" style="color:' + c_stock[i].color + '">' + c_stock[i].name + '</span><br>' +
+                            '<span id="ts_code" onclick="to_stockDetails(this,2)" class="span4" style="color:' + c_stock[i].color + '">' + c_stock[i].ts_code + '</span>' +
+                            '<span class="span4" style="color:' + c_stock[i].color + '">' + c_stock[i].industry + '</span></div>'
+                        $('#my-stock').append(htmlStr)
                     }
                 }
-            });
- }
+            }
+        })
+    }
 
- function get_line_chart_data(ts_code,type){
-    var post_data={
-        "ts_code":ts_code,
-         "csrfmiddlewaretoken":$("[name='csrfmiddlewaretoken']").val()
-     }
-     $.ajax({
-         url: '/get_index_line_chart/',
-         type: "POST",
-         data: post_data,
-         success: function (data) {
-             lineChartData ={
-                 "categoryData":data.categoryData,
-                 "values":data.values,
-             }
-             show_stock_mark(lineChartData,type)
-         }
-     })
- }
 
- function sort_100(variable1,variable2){
-     var post_data={
-         "how":variable1,//上升或者下降
-         "type":variable2,//数据种类
-         "csrfmiddlewaretoken":$("[name='csrfmiddlewaretoken']").val()
-     }
-      $.ajax({
-                url:  '/get_sort/',
-                type: "POST",
-                data: post_data,
-                success: function (data) {
-                    var stocks=JSON.parse(data); //可以将json字符串转换成json对象
-                    $("#paging_table").html('')
-                    if (variable1=='0'){
-                        var color1="#00FA9A";
-                        var color2="#90EE90";
-                    }
-                     if (variable1=='1'){
-                        var color1="#ef232a";
-                        var color2="#ffa400";
-                    }
-                   for( var i in stocks ) {
-                      htmlStr= '<tr>'
-                          +' <td>'+i+ '</td>'
-                          +' <td class="point" id="btn" onclick="to_stockDetails(this)" style="color:#4169E1" > '+stocks[i].symbol+'<span id="ts_code" hidden>'+stocks[i].ts_code+'</span></td>'
-                          +' <td class="point" id="btn" onclick="to_stockDetails(this)"style="color:#4169E1">'+ stocks[i].name+'</td>'
-                          +' <td style="color:'+color1+'">'+ stocks[i].pre_close+'</td> '
-                          +' <td style="color:'+color1+'">'+ stocks[i].open+'</td> '
-                          +' <td style="color:'+color2+'">'+ stocks[i].high+'</td>'
-                          +' <td style="color:'+color2+'">'+ stocks[i].close+'</td>'
-                          +' <td style="color:'+color1+'">'+ stocks[i].pct_chg+'</td>'
-                          +' <td style="color:'+color1+'">'+ stocks[i].change+'</td>'
-                          +' <td >'+ stocks[i].amount+'</td>'
-                          +'  <td><button  class="show-details-bt" type="button" id="show_detail" onclick="to_stockDetails(this)">查看更多详情</button></td>'
-                          +'</tr>'
-                       $("#paging_table").append(htmlStr)
-                   }
-                   paging()
+    function get_sina_news() {
+        var post_data = {
+            "csrfmiddlewaretoken": $("[name='csrfmiddlewaretoken']").val()
+        }
+        $.ajax({
+            url: '/get_sina_news/',
+            type: "POST",
+            data: post_data,
+            success: function (data) {
+                var news = JSON.parse(data); //可以将json字符串转换成json对象
+                for (var i in news) {
+                    strHtml = '<div id="news-content" class="news-content">' +
+                        '<span style="color:#609ab6">' + news[i].datetime + '</span>'
+                        + '<p onclick="show_news()">' + news[i].content + '</p>' + '</div>';
+                    $("#news-box").append(strHtml)
                 }
-      });
+            }
+        })
+    }
 
- }
+    function show_news() {
+
+        window.location.href = "/news/"
+    }
+
+    function to_stockDetails(obj, temp) {
+        if (temp == 1) {
+            var ts_code = $(obj).parents("tr").find("#ts_code").text()
+        }
+        if (temp == 2) {
+            var ts_code = $(obj).parent("div").find("#ts_code").text()
+            alert(ts_code)
+        }
+        var post_data = {
+            "ts_code": ts_code,
+            "csrfmiddlewaretoken": $("[name='csrfmiddlewaretoken']").val()
+        };
+        $.ajax({
+            url: '/query_stockDetails/',
+            type: "POST",
+            data: post_data,
+            success: function (data) {
+                window.location.href = "/show_stockDetails/"
+            }
+        });
+    }
+
+    function get_index() {
+        var post_data = {
+            "csrfmiddlewaretoken": $("[name='csrfmiddlewaretoken']").val()
+        };
+        $.ajax({
+            url: '/get_index/',
+            type: "POST",
+            data: post_data,
+            success: function (data) {
+                var marks = JSON.parse(data.json_indexList); //可以将json字符串转换成json对象
+                for (var i in marks) {
+                    if (marks[i].pct_chg < 0) {
+                        var color = "#00FA9A"
+                    } else {
+                        var color = "#dd2200"
+                    }
+                    strOnclick = 'get_line_chart_data("' + marks[i].ts_code + '","' + marks[i].name + '")';
+                    strHtml = '<div class="mark" onclick=' + strOnclick + '>' +
+                        '<div class="mark-name" >' + marks[i].name + '</div>' +
+                        '<div style="float:left;margin-left:20px"><p><span style="color:' + color + '"class="span1">' + marks[i].high + '</sapn></p>' +
+                        '<p><span style="color:' + color + '" class="span2">' + marks[i].change + '</span>' +
+                        '<span style="color:' + color + '" class="span3">(' + marks[i].pct_chg + '%)<span></p></div>' +
+                        '</div>';
+                    $("#marks-box").append(strHtml)
+                }
+            }
+        });
+    }
+
+    function get_line_chart_data(ts_code, type) {
+        var post_data = {
+            "ts_code": ts_code,
+            "csrfmiddlewaretoken": $("[name='csrfmiddlewaretoken']").val()
+        }
+        $.ajax({
+            url: '/get_index_line_chart/',
+            type: "POST",
+            data: post_data,
+            success: function (data) {
+                lineChartData = {
+                    "categoryData": data.categoryData,
+                    "values": data.values,
+                }
+                show_stock_mark(lineChartData, type)
+            }
+        })
+    }
+
+    function sort_100(variable1, variable2) {
+        var post_data = {
+            "how": variable1,//上升或者下降
+            "type": variable2,//数据种类
+            "csrfmiddlewaretoken": $("[name='csrfmiddlewaretoken']").val()
+        }
+        $.ajax({
+            url: '/get_sort/',
+            type: "POST",
+            data: post_data,
+            success: function (data) {
+                var stocks = JSON.parse(data); //可以将json字符串转换成json对象
+                $("#paging_table").html('')
+                if (variable1 == '0') {
+                    var color1 = "#00FA9A";
+                    var color2 = "#90EE90";
+                }
+                if (variable1 == '1') {
+                    var color1 = "#ef232a";
+                    var color2 = "#ffa400";
+                }
+                for (var i in stocks) {
+                    htmlStr = '<tr>'
+                        + ' <td>' + i + '</td>'
+                        + ' <td class="point" id="btn" onclick="to_stockDetails(this,1)" style="color:#4169E1" > ' + stocks[i].symbol + '<span id="ts_code" hidden>' + stocks[i].ts_code + '</span></td>'
+                        + ' <td class="point" id="btn" onclick="to_stockDetails(this,1)"style="color:#4169E1">' + stocks[i].name + '</td>'
+                        + ' <td style="color:' + color1 + '">' + stocks[i].pre_close + '</td> '
+                        + ' <td style="color:' + color1 + '">' + stocks[i].open + '</td> '
+                        + ' <td style="color:' + color2 + '">' + stocks[i].high + '</td>'
+                        + ' <td style="color:' + color2 + '">' + stocks[i].close + '</td>'
+                        + ' <td style="color:' + color1 + '">' + stocks[i].pct_chg + '</td>'
+                        + ' <td style="color:' + color1 + '">' + stocks[i].change + '</td>'
+                        + ' <td >' + stocks[i].amount + '</td>'
+                        + '  <td><button  class="show-details-bt" type="button" id="show_detail" onclick="to_stockDetails(this,1)">查看更多详情</button></td>'
+                        + '</tr>'
+                    $("#paging_table").append(htmlStr)
+                }
+                paging()
+            }
+        });
+
+    }
 
 </script>
 </html>

@@ -1,6 +1,6 @@
 .result-box{
     min-height: 780px;
-    margin: 20px 50px 60px 80px;
+    margin: 40px 50px 60px 80px;
     background: #ffffff;
 }
 .result-table{
@@ -13,11 +13,13 @@
     text-align: center;
 }
 
+
 .paging{
     height:30px;
     margin:20px 20px 20px 350px;
 }
 .show-details-bt{
+    float: left;
     display: block;
     margin: 0px auto;
     padding: 5px 10px;
@@ -44,7 +46,13 @@
     0px 0px 5px rgba(0, 0, 0, 0.4),
     inset 0px 0px 5px rgba(0, 0, 0, 0.5);
 }
-
+.title{
+    color: #465c71;
+    font-size: 25px;
+    position: absolute;
+    left: 100px;
+    top: 0px;
+}
 
 
 

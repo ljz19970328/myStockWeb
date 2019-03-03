@@ -9,6 +9,7 @@ from myStockApp.models import Stock, User, UserStockDetails
 from myStockApp.models import StockDetails
 import tushare as ts
 from django.db.models import Q
+
 token = "e2fe953eb0ec041fe719d9c45c3fd632ea37635b415bd3839d747f19"
 ts.set_token(token)
 pro = ts.pro_api()
@@ -20,7 +21,7 @@ def search(request):
     try:
         global stock_data
         stock_data = Stock.objects.filter(Q(ts_code=stock_info) | Q(symbol=stock_info) | Q(name=stock_info) |
-                                     Q(area=stock_info) |Q(industry=stock_info) | Q(market=stock_info))
+                                          Q(area=stock_info) | Q(industry=stock_info) | Q(market=stock_info))
         response['msg'] = 'ok'
     except:
         response['msg'] = 'flase'
@@ -29,7 +30,7 @@ def search(request):
 
 
 def show_searchResult(request):
-    return render(request, 'searchResults.html',{'searchResults': stock_data})
+    return render(request, 'searchResults.html', {'searchResults': stock_data})
 
 
 def get_trade_date(latest_time):
@@ -83,10 +84,12 @@ def del_daily_basic(ts_code):
     data = df.to_json(orient='index')  # dataframe转json
     temp_data = json.loads(data)  # json转dict
     daily_basic_data = temp_data['0']  # dic 取第一条记录
+
     # dict转obj
     class DicToObj:
         def __init__(self, **entries):
             self.__dict__.update(entries)
+
     r = DicToObj(**daily_basic_data)
     return daily_basic_data
 
@@ -109,7 +112,7 @@ def deal_Daily(ts_code):
     volume = list(reversed(temp_data))
     macd, dea, diff = cal_macd(df, ts_code, '20180101')
     # 返回值
-    return (categoryData,values,volume,macd,dea,diff)
+    return (categoryData, values, volume, macd, dea, diff)
 
 
 # 获得周线数据，提取周k线所需数据
@@ -130,7 +133,7 @@ def deal_Weekly(ts_code):
     volume = list(reversed(temp_data))
     macd, dea, diff = cal_macd(df, ts_code, '20160101')
     # 返回值
-    return(categoryData, values, volume,macd,dea,diff)
+    return (categoryData, values, volume, macd, dea, diff)
 
 
 # 获得月线数据，提取月k线所需数据
@@ -154,8 +157,7 @@ def deal_Monthly(ts_code):
     return (categoryData, values, volume, macd, dea, diff)
 
 
-def cal_macd(data,ts_code,start_data):
-
+def cal_macd(data, ts_code, start_data):
     # data是包含高开低收成交量的标准dataframe
     # short_,long_,m分别是macd的三个参数
     # 返回值是diff,dea,macd三个list
@@ -164,10 +166,10 @@ def cal_macd(data,ts_code,start_data):
     long_ = 26
     m = 9
     data = data.reindex(index=data.index[::-1])
-    data['diff'] = data['close'].ewm(adjust=False,alpha=2/(short_+1),ignore_na=True).mean()-\
-                data['close'].ewm(adjust=False,alpha=2/(long_+1),ignore_na=True).mean()
-    data['dea'] = data['diff'].ewm(adjust=False,alpha=2/(m+1),ignore_na=True).mean()
-    data['macd'] = 2*(data['diff']-data['dea'])
+    data['diff'] = data['close'].ewm(adjust=False, alpha=2 / (short_ + 1), ignore_na=True).mean() - \
+                   data['close'].ewm(adjust=False, alpha=2 / (long_ + 1), ignore_na=True).mean()
+    data['dea'] = data['diff'].ewm(adjust=False, alpha=2 / (m + 1), ignore_na=True).mean()
+    data['macd'] = 2 * (data['diff'] - data['dea'])
     # 获得macd列表
     vol1 = data["macd"]
     macd = vol1.tolist()
@@ -177,11 +179,11 @@ def cal_macd(data,ts_code,start_data):
     # 获得diff列表
     vol3 = data["diff"]
     diff = vol3.tolist()
-    return(macd,dea,diff)
+    return (macd, dea, diff)
 
 
 def show_stockDetails(request):
-    stockDetails=stock_details
+    stockDetails = stock_details
     ts_code = request.session.get('global_ts_code')
     # 创建本地变量
     categoryData0, values0, volume0, macd0, dea0, diff0 = deal_Daily(ts_code)
@@ -199,32 +201,32 @@ def stock_fluctuation(request):
     trade_date = get_trade_date(16)
     # 日线最晚更新时间16点
     df = pro.daily(trade_date=trade_date)
-    stockData = df[['ts_code', 'pre_close', 'open', 'high','close','change','pct_chg','amount']]
+    stockData = df[['ts_code', 'pre_close', 'open', 'high', 'close', 'change', 'pct_chg', 'amount']]
     try:
-        stock_name_list = Stock.objects.all().values_list('ts_code','name','symbol')
+        stock_name_list = Stock.objects.all().values_list('ts_code', 'name', 'symbol')
         # 数据库取出股票名称,股票代码 ,为queryset类型数据
-        nameFrame = pd.DataFrame(list(stock_name_list))
+        nameDFrame = pd.DataFrame(list(stock_name_list))
         # queryset类型数据转成DataFrame
-        nameFrame.columns = ['ts_code', 'name', 'symbol']
+        nameDFrame.columns = ['ts_code', 'name', 'symbol']
         # 重新添加列明
-        result = pd.merge(stockData, nameFrame,on='ts_code')
+        result = pd.merge(stockData, nameDFrame, on='ts_code')
         # 通过列名ts_code把两个frame拼接
     except:
         print("数据库查询失败")
     json_stockList = result.to_json(orient='records', force_ascii=False)  # dataframe转json
     json_stockList = json.loads(json_stockList)  # json转list
-    if(how == '1'):
+    if (how == '1'):
         high_1000 = heapq.nlargest(100, json_stockList, key=lambda s: s[sort_name])  # 选出前100大的元素
         high_1000 = json.dumps(high_1000, ensure_ascii=False)
         stockList = high_1000
-    if(how == '0'):
+    if (how == '0'):
         low_1000 = heapq.nsmallest(100, json_stockList, key=lambda s: s[sort_name])  # 选出前100小的元素
         low_1000 = json.dumps(low_1000, ensure_ascii=False)
         stockList = low_1000
     return HttpResponse(stockList)
 
 
-def get_index(request):
+def get_index(request):  # 获得当天大盘数据
     trade_date = get_trade_date(16)  # 15时修盘，数据来源可能更新不及时，所以推后一时获取
     df_SZ = pro.index_daily(ts_code='399001.SZ', trade_date=trade_date)
     df_SZ['name'] = '深证成指'
@@ -238,7 +240,7 @@ def get_index(request):
     return JsonResponse(data)
 
 
-def get_index_line_chart(request):
+def get_index_line_chart(request):  # 获得大盘日线数据
     ts_code = request.POST.get('ts_code')
     data = pro.index_daily(ts_code=ts_code)
     lineChart_time = data["trade_date"]
@@ -254,31 +256,57 @@ def get_index_line_chart(request):
     return JsonResponse(data)
 
 
-def show_collection_stockDetails(request):  # 我的收藏页面数据填充
-    LoginName1=request.session.get("islogin")
+def show_myCollection(request):  # 在主页面显示我的收藏
+    LoginName = request.session.get("isLogin")
     response = {"msg": ""}
-    if(User.objects.filter(name=LoginName1)):
-      try:
-          global stock_data1
-          stock_data1 = UserStockDetails.objects.filter(Q(UserCollectionDetails_username=LoginName1))#获取用户收藏股票代码
-          menu_list=[]
-          for i in stock_data1:
-              menu=Stock.objects.get(ts_code=i.UserCollectionDetails_name)#查询收藏股票的具体信息
-              menu_list.append(menu)
-          global  col_data
-          col_data=menu_list
-          response['msg'] = 'ok'
-          return render(request, 'myCollectionStock.html', {'searchResults': col_data})#渲染数据进入我的收藏界面
-      except:
-        response['msg'] = 'flase'
-        print("查询失败")
-      return JsonResponse(response)
+    trade_date = get_trade_date(16)
+    if User.objects.filter(name=LoginName):
+        try:
+            stock_data2 = UserStockDetails.objects.filter(Q(UserCollectionDetails_username=LoginName))  # 获取用户收藏股票代码
+            Stock_C_list = []
+            for i in stock_data2:
+                c_stock = Stock.objects.get(ts_code=i.UserCollectionDetails_name)  # 查询收藏股票的具体信息
+                # 日线最晚更新时间16点
+                df = pro.daily(ts_code=c_stock.ts_code, trade_date=trade_date)
+                if list(df['pct_chg'])[0] >= 0:  # 判断涨跌
+                    color = "#dd2200"  # 红色
+                else:
+                    color = "#00FA9A"  # 绿色
+                temp = {"ts_code": c_stock.ts_code, "name": c_stock.name, "industry": c_stock.industry, "color": color}
+                Stock_C_list.append(temp)
+            json_C_list = json.dumps(Stock_C_list[0:11], ensure_ascii=False)
+            response['msg'] = 'ok'
+            return HttpResponse(json_C_list)
+        except:
+            response['msg'] = 'flase'
+            print("查询失败")
+            return JsonResponse(response)
+    else:
+        response['msg']='noLogin'
+        return JsonResponse(response)
+
+
+def show_collection_stockDetails(request):  # 我的收藏页面数据填充
+    LoginName = request.session.get("isLogin")
+    response = {"msg": ""}
+    if User.objects.filter(name=LoginName):
+        try:
+            stock_data2 = UserStockDetails.objects.filter(Q(UserCollectionDetails_username=LoginName))  # 获取用户收藏股票代码
+            menu_list = []
+            for i in stock_data2:
+                menu = Stock.objects.get(ts_code=i.UserCollectionDetails_name)  # 查询收藏股票的具体信息
+                menu_list.append(menu)
+            col_data = menu_list
+            response['msg'] = 'ok'
+            return render(request, 'myCollectionStock.html', {'searchResults': col_data})  # 渲染数据进入我的收藏界面
+        except:
+            response['msg'] = 'flase'
+            print("查询失败")
+        return JsonResponse(response)
     else:
         response['msg'] = 'noLog'
         return JsonResponse(response)
-       # return render(request, 'login.html')
-
-
+    # return render(request, 'login.html')
 
 
 def main(request):

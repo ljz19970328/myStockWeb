@@ -1,59 +1,65 @@
-.sc-logo{
+.sc-logo {
     position: absolute;
     width: 25px;
     top: 5px;
     left: 25px;
 }
-.my-stock-title{
+
+.my-stock-title {
     position: absolute;
     top: 5px;
-    left:50px ;
+    left: 50px;
 }
-.my-stock{
+
+.my-stock {
     position: absolute;
     top: 30px;
     left: 20px;
-    height:500px;
+    height: 500px;
     width: 200px;
     border: 1px solid #609ab6;
     background: #ffffff;
 }
 
-.mark-logo{
-  position: absolute;
+.mark-logo {
+    position: absolute;
     width: 25px;
     top: 6px;
     left: 250px;
 }
-.mark-title{
+
+.mark-title {
     position: absolute;
     top: 5px;
-    left:280px;
+    left: 280px;
 }
-.large-mark{
+
+.large-mark {
     position: absolute;
     top: 30px;
     left: 245px;
-    height:500px;
+    height: 500px;
     width: 650px;
     border: 1px solid #609ab6;
     background: #ffffff;
 }
 
-.mark{
-   float: left;
-    margin-top:20px;
-    margin-left:80px;
+.mark {
+    float: left;
+    margin-top: 20px;
+    margin-left: 80px;
     width: 200px;
-    height:140px;
+    height: 140px;
     border-bottom: 1px solid #003300;
 }
-.mark:hover{
+
+.mark:hover {
     cursor: pointer;
     background: #dde4ec;
 
 }
-.lineChart-box{
+
+.lineChart-box {
     position: absolute;
     width: 600px;
     height: 300px;
@@ -61,48 +67,72 @@
     left: 25px;
     background: #ebeff0;
 }
-.span1{
-    font-size:32px;
-}
-.span2{
-    font-size:16px;
-}
-.span3{
-    font-size:13px;
+
+.span1 {
+    font-size: 32px;
 }
 
-.mark-name{
+.span2 {
+    font-size: 16px;
+}
+
+.span3 {
+    font-size: 13px;
+}
+
+.span4 {
+    font-size: 14px;
+    margin-left: 10px;
+}
+
+.c-box {
+    float: left;
+    border-bottom: 1px solid #bbccdd;
+    margin-left: 20px;
+    width: 160px;
+
+}
+
+.span4:hover {
+    cursor: pointer;
+    text-decoration: underline;
+}
+
+.mark-name {
     float: left;
     margin-left: 10px;
-    width:22px;
-    height:140px;
+    width: 22px;
+    height: 140px;
     font-size: 18px;
     line-height: 30px;
     border-bottom: 0px;
     background: #dde4ec;
 }
 
-.sina-logo{
-  position: absolute;
+.sina-logo {
+    position: absolute;
     width: 25px;
     top: 6px;
     left: 925px;
 }
-.news-title{
+
+.news-title {
     position: absolute;
     top: 5px;
-    left:955px;
+    left: 955px;
 }
-.news{
+
+.news {
     position: absolute;
     top: 30px;
     left: 920px;
-    height:500px;
+    height: 500px;
     width: 250px;
     border: 1px solid #609ab6;
     background: #ffffff;
 }
-.news-content p{
+
+.news-content p {
 
     font-size: 16px;
     margin-top: 2px;
@@ -112,74 +142,86 @@
     -webkit-line-clamp: 1;
     overflow: hidden;
 }
-.news-content p:hover{
+
+.news-content p:hover {
     cursor: pointer;
-    text-decoration:underline;
+    text-decoration: underline;
 }
-.news-content{
-    text-overflow : clip;
+
+.news-content {
+    text-overflow: clip;
     float: left;
     width: 250px;
     height: auto;
 }
 
-.up-logo{
-  position: absolute;
+.up-logo {
+    position: absolute;
     width: 25px;
     top: 543px;
     left: 20px;
 }
-.sequence-title{
+
+.sequence-title {
     position: absolute;
-    top:540px;
+    top: 540px;
     left: 50px;
 }
-.stock-sequence{
+
+.stock-sequence {
     position: absolute;
     top: 565px;
     left: 20px;
-    height:360px;
+    height: 360px;
     width: 1150px;
     border: 1px solid #609ab6;
     background: #ffffff;
 }
-.index td{
+
+.index td {
     line-height: 37px;
 }
-.index td div{
-   float: right;
-    margin-top:10px;
-    margin-right:5px;
+
+.index td div {
+    float: right;
+    margin-top: 10px;
+    margin-right: 5px;
     width: 12px;
-    height:25px;
+    height: 25px;
 }
-.index td div img{
+
+.index td div img {
     float: left;
-    width:10px;
+    width: 10px;
     cursor: pointer;
 }
+
 .index td div img:hover {
-    transform:scale(1.4);
+    transform: scale(1.4);
 }
-.sequence-table{
-     margin:auto;
+
+.sequence-table {
+    margin: auto;
     border-collapse: collapse;
 }
 
-.sequence-table td{
+.sequence-table td {
     min-width: 95px;
     height: 28px;
     text-align: center;
 }
-.point:hover{
+
+.point:hover {
     cursor: pointer;
-    text-decoration:underline;
+    text-decoration: underline;
 }
-.paging{
-    height:30px;
-    margin:5px 20px 20px 350px;
+
+.paging {
+    height: 30px;
+    margin: 5px 20px 20px 350px;
 }
-.show-details-bt{
+
+.show-details-bt {
     display: block;
     margin: 0px auto;
     padding: 5px 10px;
@@ -197,8 +239,8 @@
     transition: all .5s ease 0.2s;
 }
 
-.show-details-bt:hover{
-     cursor: pointer;
+.show-details-bt:hover {
+    cursor: pointer;
     background: #690;
     color: #030;
     text-shadow: 1px 1px rgba(250, 250, 250, 0.5);
