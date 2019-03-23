@@ -25,16 +25,16 @@ class User(models.Model):
 
 
 class Stock(models.Model):
-    ts_code = models.CharField(max_length=32, unique=True)  # tushare接口搜索代码
+    ts_code = models.CharField(max_length=32, unique=True)  # Tushare接口搜索代码
     symbol = models.CharField(max_length=32, unique=True)  # 股票代码
     name = models.CharField(max_length=32, unique=True)  # 股票名称
     area = models.CharField(max_length=32 )  # 股票地域
     industry = models.CharField(max_length=32)  # 股票行业
     market = models.CharField(max_length=32)  # 股票市场类型
-    list_date = models.CharField(max_length=32) #股票上市时间
+    list_date = models.CharField(max_length=32)  # 股票上市时间
 
     def __str__(self):
-        return self.name
+        return self
 
 
 class StockDetails(models.Model):
@@ -55,14 +55,21 @@ class StockDetails(models.Model):
     business_scope = models.TextField(null=True)
 
     def __str__(self):
-        return self.name
+        return self.ts_code
 
 
 class UserStockDetails(models.Model):
-    #UserCollection_id = models.AutoField(primary_key=True)
     UserCollectionDetails_username = models.CharField(max_length=32,null=False)
     UserCollectionDetails_name = models.CharField(max_length=32,null=False)
     c_time = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return (self.name)
+        return self.UserCollectionDetails_username
+
+
+class News(models.Model):
+    src = models.CharField(max_length=32)
+    datetime = models.CharField(max_length=32)
+    title = models.CharField(max_length=128)
+    channels = models.CharField(max_length=32)
+    content = models.TextField()
