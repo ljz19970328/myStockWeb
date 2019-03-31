@@ -13,11 +13,13 @@ function show_k_line(data,type) {
             var sum = 0;
             for (var j = 0; j < Count; j++) {
                 //收盘价总和
-                sum += data.values[i - j][1];
-                //alert(sum);
+                a=parseFloat(data.values[i - j][1]);//tushare取的数据为float，本地数据库为string，所以要类型转换
+                //alert(typeof(a));
+                sum += a;
+                //alert(typeof(data.values[i - j][1]));
             }
             result.push(sum / Count);
-            // alert(result);
+             //alert(result);
         }
         return result;
     }

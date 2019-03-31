@@ -1,5 +1,5 @@
 from django.conf.urls import url
-from myStockApp import views, dealSearch, dealEmail
+from myStockApp import views, dealSearch, dealEmail, daelFluctuation, dealIndex
 from myStockApp import dealCollection
 from myStockApp import dealStockData
 from myStockApp import dealNews
@@ -27,12 +27,14 @@ urlpatterns = [
     url(r'^query_stockDetails/', dealStockData.query_stockDetails),
     url(r'^show_stockDetails/', dealStockData.show_stockDetails),
     url(r'^logo/', dealStockData.companyLogo_image),
-    url(r'^get_sort/', dealStockData.stock_fluctuation),
-    url(r'^get_index/', dealStockData.get_index),
-    url(r'^get_index_line_chart/', dealStockData.get_index_line_chart),
+    #  配置dealIndex.py的映射
+    url(r'^get_index/', dealIndex.get_index),
+    url(r'^get_index_line_chart/', dealIndex.get_index_line_chart),
     #  配置dealSearch.py的映射
     url(r'^search/', dealSearch.search),
     url(r'^show_searchResult/', dealSearch.show_searchResult),
+    #  配置daelFluctuation.py的映射
+    url(r'^get_sort/', daelFluctuation.stock_fluctuation),
     #  配置dealNews.py的映射
     url(r'^news/', dealNews.show_news),
     url(r'^get_news/', dealNews.get_news),
